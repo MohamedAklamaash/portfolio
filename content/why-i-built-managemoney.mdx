@@ -1,0 +1,116 @@
+---
+title: Why I built ManageMoney.ai
+description: Because managing money shouldn't require a finance degree or hours of manual data entry
+date: 2024-10-15
+---
+
+> [ManageMoney.ai](https://manage-money-with-ai.vercel.app/) is an AI-powered personal finance tracker with OCR-based transaction parsing, smart budgeting recommendations, and investment insights. You can [try it out](https://manage-money-with-ai.vercel.app/) or [check the code](https://github.com/MohamedAklamaash/ManageMoneyWithAI).
+
+Let's be honest, managing personal finances is a pain. You know you should track your expenses, stick to a budget, and make smart financial decisions. But in reality? You download some expense tracker app, manually enter transactions for like three days, get bored, forget about it, and then wonder where all your money went at the end of the month.
+
+I've been there. Multiple times. The problem isn't that we don't want to manage our money better, it's that the tools make it feel like a second job. Manual data entry, guessing budget amounts, trying to remember what that random ₹500 transaction was for last week. It's exhausting.
+
+So I thought, what if we could make this whole thing actually intelligent? Not just a digital spreadsheet, but something that actually helps you understand your money without the tedious work.
+
+## The Problem
+
+Traditional expense trackers are stuck in the past. They expect you to:
+
+- Manually type in every single transaction (who has time for that?)
+- Categorize each expense yourself (was that coffee "food" or "entertainment"?)
+- Create budgets based on pure guesswork
+- Stare at charts and figure out patterns yourself
+
+The friction is real. You start with good intentions, but after a week of manual entry, you give up. And without consistent tracking, you can't make informed decisions about your money.
+
+## Enter ManageMoney.ai
+
+I wanted to build something that removes all that friction. Something that does the boring work for you and gives you actual insights, not just data.
+
+The core idea was simple: use AI to automate everything that doesn't need human input, and provide intelligent recommendations for the things that do.
+
+### OCR-Based Transaction Parsing
+
+This was the first big problem to solve. Nobody wants to manually type in transaction details. So I added OCR (Optical Character Recognition). Just snap a photo of your receipt or upload a screenshot of a transaction, and the system automatically extracts all the details. Amount, merchant, date, everything.
+
+No more typing. Just upload and move on.
+
+### AI-Powered Categorization
+
+Once transactions are in the system, Google Gemini API analyzes them and automatically categorizes them. And it's not just basic keyword matching, it actually understands context. That coffee shop transaction? It knows whether it's a quick coffee (food) or a two-hour work session (workspace/business expense).
+
+The AI learns from your patterns over time, so categorization gets more accurate the more you use it.
+
+### Smart Budgeting Recommendations
+
+Here's where it gets interesting. Instead of you guessing "I should probably spend ₹5000 on groceries this month," the AI analyzes your historical spending and gives you data-driven budget recommendations.
+
+It looks at your patterns, considers seasonal variations, and suggests realistic budgets based on your actual lifestyle. No more arbitrary numbers that you'll break in the first week.
+
+### Investment Opportunities
+
+The system doesn't just track where your money goes, it also identifies where it could grow. Based on your spending patterns and savings, it suggests investment opportunities that make sense for your financial situation.
+
+It's like having a financial advisor who actually knows your spending habits.
+
+## Building It
+
+### Tech Stack
+
+I went with a modern, scalable stack:
+
+- **Next.js + Vite** for the frontend (fast development, great DX)
+- **Tailwind CSS** for styling (because life's too short for writing custom CSS)
+- **PostgreSQL + Prisma** for the database (type-safe queries are a lifesaver)
+- **Google Gemini API** for all the AI magic
+- **Clerk** for authentication (secure, easy to implement)
+- **Docker** for containerization (because deployment shouldn't be a nightmare)
+
+### The Challenges
+
+**OCR Accuracy**
+
+Getting reliable text extraction from receipts was harder than I expected. Receipts come in all formats, different fonts, varying quality. I had to implement preprocessing pipelines to normalize images before OCR. Adjusting brightness, contrast, rotation, all that fun stuff. It significantly improved accuracy, but it took a lot of iteration.
+
+**Prompt Engineering**
+
+Making Gemini API provide useful financial insights required a lot of trial and error. The key was giving it enough context about spending patterns while keeping prompts clear and structured. Too vague, and you get generic advice. Too specific, and it misses the bigger picture.
+
+**Database Optimization**
+
+Financial data grows fast. Every transaction, every category, every budget update. Query performance started degrading as test data grew. I had to implement proper indexing strategies and optimize Prisma queries. Response times improved by about 60% after optimization.
+
+**Containerization**
+
+Setting up Docker was straightforward, but making sure everything worked smoothly in production took some debugging. Environment variables, database connections, volume mounts, all the little things that can break in production. But once it was working, deployment became so much easier.
+
+## What I Learned
+
+Building ManageMoney.ai taught me that the best tools aren't the ones with the most features, they're the ones that remove friction. Every feature I added, I asked myself: "Does this make managing money easier, or am I just adding complexity?"
+
+The OCR feature saves users hours of manual entry. The AI categorization removes decision fatigue. The smart budgeting gives confidence instead of guesswork. That's what matters.
+
+I also learned a ton about working with AI APIs at scale. Rate limiting, error handling, fallback strategies, all the things you don't think about until they break in production.
+
+## The Impact
+
+ManageMoney.ai is live and helping people take control of their finances without the usual headaches. Users are:
+
+- Saving hours of manual data entry every month
+- Making better financial decisions with AI-powered insights
+- Discovering spending patterns they never noticed before
+- Setting realistic budgets based on actual data, not guesswork
+
+The best feedback I've gotten? "I actually use this one." That's the goal. Not just another app that sits unused after a week.
+
+## Try It Out
+
+The project is live at [manage-money-with-ai.vercel.app](https://manage-money-with-ai.vercel.app/)
+
+Check out the code on [GitHub](https://github.com/MohamedAklamaash/ManageMoneyWithAI)
+
+---
+
+Building ManageMoney.ai reinforced something I already believed: technology should work for us, not the other way around. Managing money is important, but it shouldn't consume your time and energy. Let the AI handle the boring parts, so you can focus on actually living your life.
+
+Funny how a frustration with manual expense tracking turned into a full-fledged AI-powered finance platform.
