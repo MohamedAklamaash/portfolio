@@ -12,17 +12,25 @@ const CURRENT_SECTION = [
   {
     start: "Building secure systems at",
     end: (
-      <span className="text-gray-200">
+      <Link
+        href="https://www.unboundsecurity.com"
+        className="text-gray-200 underline"
+        target="_blank"
+      >
         Unbound Security (YC S24)
-      </span>
+      </Link>
     ),
   },
   {
     start: "Pursuing M.Sc. Data Science at",
     end: (
-      <span className="text-gray-200">
+      <Link
+        href="https://www.psgtech.edu"
+        className="text-gray-200 underline"
+        target="_blank"
+      >
         PSG College of Technology
-      </span>
+      </Link>
     ),
   },
 ];
