@@ -1,4 +1,4 @@
-import { FolderClosedIcon, HouseIcon, TextIcon } from "lucide-react";
+import { BriefcaseIcon, CpuIcon, FileUserIcon, FolderClosedIcon, HouseIcon, TextIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +10,16 @@ let navItems = [
     icon: <HouseIcon size={18} />,
   },
   {
+    name: "Experience",
+    href: "/experience",
+    icon: <BriefcaseIcon size={18} />,
+  },
+  {
+    name: "Skills",
+    href: "/skills",
+    icon: <CpuIcon size={18} />,
+  },
+  {
     name: "Projects",
     href: "/projects",
     icon: <FolderClosedIcon size={18} />,
@@ -18,6 +28,11 @@ let navItems = [
     name: "Posts",
     href: "/posts",
     icon: <TextIcon size={18} />,
+  },
+  {
+    name: "Resume",
+    href: "/resume.pdf",
+    icon: <FileUserIcon size={18} />,
   },
 ];
 

@@ -45,6 +45,8 @@ export const TECH_STACK: { [key: string]: techStack } = {
   OCR: { title: "OCR", color: COLOR.CYAN },
   DLP: { title: "DLP", color: COLOR.RED },
   ML: { title: "ML", color: COLOR.VIOLET },
+  RAG: { title: "RAG", color: COLOR.GREEN },
+  FINETUNING: { title: "Fine-tuning", color: COLOR.PINK },
 };
 
 interface techStack {
@@ -65,9 +67,9 @@ export interface Project {
 export const PROJECTS_DATA: Project[] = [
   {
     title: "MANAGE_MONEY",
-    shortDescription: "AI-powered personal finance tracker with OCR and smart budgeting",
+    shortDescription: "Financial analytics platform with AI transaction parsing and budgeting",
     description:
-      "AI-driven personal finance tracker with OCR-based transaction parsing and AI-powered budgeting recommendations. Features expense tracking with categorization, budget management, AI insights, and investment opportunities exploration. Containerized with Docker for scalability.",
+      "Architected a financial analytics platform using Next.js and PostgreSQL. Integrated GPT-4 for automated OCR receipt parsing and intelligent budget recommendations, deployed via Docker for consistent environments.",
     techStack: [
       TECH_STACK.NEXTJS,
       TECH_STACK.POSTGRESQL,
@@ -81,9 +83,9 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     title: "SONIC_K8s",
-    shortDescription: "Distributed Kubernetes video transcoding service with 40% faster processing",
+    shortDescription: "Distributed media processing engine with dynamic autoscaling",
     description:
-      "Distributed Kubernetes transcoding service providing fault-tolerant video-to-audio transcription. Features automatic video-to-audio conversion, audio transcription to text, RabbitMQ for high-throughput message queuing, and dynamic autoscaling of worker pods. Achieved 40% reduction in average processing time.",
+      "Built a high-throughput distributed video transcoding service on Kubernetes. Implemented an autoscaling worker architecture using RabbitMQ and Celery, achieving a 40% reduction in processing time for media workloads.",
     techStack: [
       TECH_STACK.PYTHON,
       TECH_STACK.DJANGO,
@@ -99,10 +101,10 @@ export const PROJECTS_DATA: Project[] = [
     isFeatured: true,
   },
   {
-    title: "PSG Tech Foundation Day 2025",
-    shortDescription: "Event management platform handling 100+ participants",
+    title: "PSG Tech Foundation Day",
+    shortDescription: "Enterprise event management portal handling 100+ concurrent users",
     description:
-      "Full-stack platform for managing events on Foundation Day 2025. Features document uploads, event registration system, award nomination process, and automated validations and confirmations. Successfully handled 100+ participants.",
+      "Delivered a full-stack event management solution for PSG Tech's Foundation Day. Handled secure document uploads and real-time registrations for 100+ participants using NestJS and React, orchestrated with Nginx.",
     techStack: [
       TECH_STACK.REACT,
       TECH_STACK.NESTJS,

@@ -1,5 +1,7 @@
 import AboutMe from "@/components/about-me";
 import FloatingWithImages from "@/components/floating-with-images";
+import FeaturedProjects from "@/components/featured-projects";
+import ContactSection from "@/components/contact-section";
 import { Button } from "@/components/ui/button";
 import Link from "@/components/ui/link";
 import { SOCIALS } from "@/lib/constants";
@@ -59,6 +61,8 @@ const Landing = () => {
     <>
       <Intro />
       <AboutMe />
+      <FeaturedProjects />
+      <ContactSection />
     </>
   );
 };
@@ -109,8 +113,8 @@ const Intro = () => {
                   PSG College of Technology
                 </Link>
                 <p className="inline">
-                  . I specialize in backend development, ML/AI systems, and cloud infrastructure.
-                  This is my corner of the web where I share my journey building reliable, scalable, and impactful solutions.
+                  . I specialize in engineering scalable backend systems, deploying ML/AI pipelines, and optimizing cloud infrastructure.
+                  This portfolio showcases my work in building reliable, high-performance solutions.
                 </p>
               </div>
               <div className="space-y-2">
