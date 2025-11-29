@@ -25,6 +25,7 @@ export const TECH_STACK: { [key: string]: techStack } = {
   PUSHER: { title: "Pusher", color: COLOR.VIOLET },
   REDIS: { title: "Redis", color: COLOR.RED },
   PYTHON: { title: "Python", color: COLOR.BLUE },
+  DJANGO: { title: "Django", color: COLOR.GREEN },
   GO: { title: "Go", color: COLOR.CYAN },
   KUBERNETES: { title: "Kubernetes", color: COLOR.VIOLET },
   DOCKER: { title: "Docker", color: COLOR.BLUE },
@@ -39,6 +40,9 @@ export const TECH_STACK: { [key: string]: techStack } = {
   SAGA: { title: "Saga", color: COLOR.PINK },
   NETWORKS: { title: "Networks", color: COLOR.BLUE },
   FTP: { title: "FTP", color: COLOR.YELLOW },
+  OCR: { title: "OCR", color: COLOR.CYAN },
+  DLP: { title: "DLP", color: COLOR.RED },
+  ML: { title: "ML", color: COLOR.VIOLET },
 };
 
 interface techStack {
@@ -80,6 +84,7 @@ export const PROJECTS_DATA: Project[] = [
       "Distributed Kubernetes transcoding service providing fault-tolerant video-to-audio transcription. Features automatic video-to-audio conversion, audio transcription to text, RabbitMQ for high-throughput message queuing, and dynamic autoscaling of worker pods. Achieved 40% reduction in average processing time.",
     techStack: [
       TECH_STACK.PYTHON,
+      TECH_STACK.DJANGO,
       TECH_STACK.KUBERNETES,
       TECH_STACK.DOCKER,
       TECH_STACK.AWS,
@@ -129,6 +134,7 @@ export const PROJECTS_DATA: Project[] = [
       "Simplified ticket marketplace platform where event organizers can list events and users can browse and purchase tickets. Features event listing for organizers, ticket browsing and purchasing, and user-friendly marketplace interface.",
     techStack: [
       TECH_STACK.NEXTJS,
+      TECH_STACK.NODEJS,
       TECH_STACK.TYPESCRIPT,
       TECH_STACK.MICROSERVICES,
       TECH_STACK.SAGA,
@@ -167,6 +173,38 @@ export const PROJECTS_DATA: Project[] = [
     githubLink: "https://github.com/MohamedAklamaash/Vreudge",
     deployedLink: undefined,
     imageSrc: "/projects/vreudge.png",
+    isFeatured: false,
+  },
+  {
+    title: "Alumni Meet",
+    shortDescription: "Alumni networking and event management platform",
+    description:
+      "Alumni networking and event management platform built with modern web technologies. Features event registration, alumni directory, and networking tools.",
+    techStack: [
+      TECH_STACK.REACT,
+      TECH_STACK.NESTJS,
+      TECH_STACK.TYPESCRIPT,
+      TECH_STACK.POSTGRESQL,
+    ],
+    githubLink: undefined,
+    deployedLink: "https://alumini-meet-frontend.vercel.app/",
+    imageSrc: "/projects/alumnimeet.png",
+    isFeatured: false,
+  },
+  {
+    title: "SmartScreenshot",
+    shortDescription: "OCR-based sensitive content detection and masking system",
+    description:
+      "OCR-based sensitive content detection system that identifies and masks API keys, passwords, and confidential text in screenshots. Features batch-processing pipelines for high-volume screenshot ingestion, ensuring scalability and reliability for security-critical operations.",
+    techStack: [
+      TECH_STACK.PYTHON,
+      TECH_STACK.OCR,
+      TECH_STACK.DLP,
+      TECH_STACK.ML,
+    ],
+    githubLink: "https://github.com/luqmaan-k/SmartScreenshot",
+    deployedLink: undefined,
+    imageSrc: "/projects/smartscreenshot.png",
     isFeatured: false,
   },
 ];

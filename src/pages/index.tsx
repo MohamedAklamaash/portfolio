@@ -160,13 +160,12 @@ const OtherLinksSection = () => {
       >
         <motion.div>
           <Button
+            asChild
             variant="ghost"
             className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500 flex"
           >
             <Link href={SOCIALS.linkedin}>
-              <Button variant="ghost" className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500 flex">
-                <SiLinkedin className="h-4 w-4" />
-              </Button>
+              <SiLinkedin className="h-4 w-4" />
             </Link>
           </Button>
         </motion.div>
@@ -206,14 +205,15 @@ const OtherLinks = ({ animate }: { animate: boolean }) => {
     <>
       {LINKS.map((link) => (
         <motion.div key={link.title} variants={animate ? variants : {}}>
-          <Link href={link.link}>
-            <Button
-              variant="ghost"
-              className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500"
-            >
+          <Button
+            asChild
+            variant="ghost"
+            className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500"
+          >
+            <Link href={link.link}>
               {link.title}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </motion.div>
       ))}
     </>
