@@ -26,7 +26,7 @@ const CURRENT_SECTION = [
     end: (
       <Link
         href="https://www.psgtech.edu"
-        className="text-gray-200 underline"
+        className="blue-text underline"
         target="_blank"
       >
         PSG College of Technology
@@ -103,7 +103,7 @@ const Intro = () => {
                 </p>
                 <Link
                   href="https://www.psgtech.edu"
-                  className="underline"
+                  className="blue-text underline"
                   target="_blank"
                 >
                   PSG College of Technology
