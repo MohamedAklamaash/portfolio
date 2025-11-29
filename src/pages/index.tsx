@@ -6,6 +6,7 @@ import { SOCIALS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { SiLinkedin } from "react-icons/si";
 
 const CURRENT_SECTION = [
   {
@@ -34,6 +35,10 @@ const LINKS = [
   {
     title: "GitHub",
     link: SOCIALS.github,
+  },
+  {
+    title: "LinkedIn",
+    link: SOCIALS.linkedin,
   },
   {
     title: "Projects",
@@ -150,7 +155,11 @@ const OtherLinksSection = () => {
             variant="ghost"
             className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500 flex"
           >
-            Links
+            <Link href={SOCIALS.linkedin}>
+              <Button variant="ghost" className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500 flex">
+                <SiLinkedin className="h-4 w-4" />
+              </Button>
+            </Link>
           </Button>
         </motion.div>
 

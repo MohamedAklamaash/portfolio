@@ -32,6 +32,13 @@ export const TECH_STACK: { [key: string]: techStack } = {
   TENSORFLOW: { title: "TensorFlow", color: COLOR.ORANGE },
   NESTJS: { title: "NestJS", color: COLOR.RED },
   TYPESCRIPT: { title: "TypeScript", color: COLOR.BLUE },
+  DEEP_LEARNING: { title: "Deep Learning", color: COLOR.VIOLET },
+  RABBITMQ: { title: "RabbitMQ", color: COLOR.ORANGE },
+  CELERY: { title: "Celery", color: COLOR.GREEN },
+  MICROSERVICES: { title: "Microservices", color: COLOR.CYAN },
+  SAGA: { title: "Saga", color: COLOR.PINK },
+  NETWORKS: { title: "Networks", color: COLOR.BLUE },
+  FTP: { title: "FTP", color: COLOR.YELLOW },
 };
 
 interface techStack {
@@ -76,6 +83,8 @@ export const PROJECTS_DATA: Project[] = [
       TECH_STACK.KUBERNETES,
       TECH_STACK.DOCKER,
       TECH_STACK.AWS,
+      TECH_STACK.RABBITMQ,
+      TECH_STACK.CELERY,
     ],
     githubLink: "https://github.com/MohamedAklamaash/SONIC_K8s",
     deployedLink: undefined,
@@ -91,6 +100,7 @@ export const PROJECTS_DATA: Project[] = [
       TECH_STACK.REACT,
       TECH_STACK.NESTJS,
       TECH_STACK.TYPESCRIPT,
+      TECH_STACK.POSTGRESQL,
     ],
     githubLink: "https://github.com/MohamedAklamaash/alumni-nomination-frontend",
     deployedLink: "https://foundationday.psgtech.ac.in/",
@@ -105,6 +115,7 @@ export const PROJECTS_DATA: Project[] = [
     techStack: [
       TECH_STACK.PYTHON,
       TECH_STACK.TENSORFLOW,
+      TECH_STACK.DEEP_LEARNING,
     ],
     githubLink: "https://github.com/MohamedAklamaash/Food_VisionWithCNN",
     deployedLink: undefined,
@@ -119,6 +130,9 @@ export const PROJECTS_DATA: Project[] = [
     techStack: [
       TECH_STACK.NEXTJS,
       TECH_STACK.TYPESCRIPT,
+      TECH_STACK.MICROSERVICES,
+      TECH_STACK.SAGA,
+      TECH_STACK.POSTGRESQL,
     ],
     githubLink: "https://github.com/MohamedAklamaash/stubhub",
     deployedLink: undefined,
@@ -133,6 +147,7 @@ export const PROJECTS_DATA: Project[] = [
     techStack: [
       TECH_STACK.REACT,
       TECH_STACK.TYPESCRIPT,
+      TECH_STACK.MONGODB,
     ],
     githubLink: "https://github.com/MohamedAklamaash/Friends",
     deployedLink: "https://friends-2.vercel.app/",
@@ -146,6 +161,8 @@ export const PROJECTS_DATA: Project[] = [
       "Decentralized distributed file system built with Golang. Features decentralized architecture and distributed file storage for reliable and scalable file management.",
     techStack: [
       TECH_STACK.GO,
+      TECH_STACK.NETWORKS,
+      TECH_STACK.FTP,
     ],
     githubLink: "https://github.com/MohamedAklamaash/Vreudge",
     deployedLink: undefined,

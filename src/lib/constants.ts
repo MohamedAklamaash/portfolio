@@ -11,7 +11,7 @@ export const SOCIAL_IDS = {
 export const SOCIALS = {
   github: `https://github.com/${SOCIAL_IDS.github}`,
   linkedin: `https://www.linkedin.com/in/${SOCIAL_IDS.linkedin}/`,
-  email: `mailto:${SOCIAL_IDS.email}`,
+  email: `https://mail.google.com/mail/u/0/?fs=1&to=${SOCIAL_IDS.email}&su=Hello!&tf=cm`,
   instagram: `https://www.instagram.com/${SOCIAL_IDS.instagram}/`,
 } as const;
 
