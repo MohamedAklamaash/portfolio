@@ -13,8 +13,8 @@ const CURRENT_SECTION = [
     start: "Building secure systems at",
     end: (
       <Link
-        href="https://www.unboundsecurity.com"
-        className="text-gray-200 underline"
+        href="https://www.unboundsecurity.ai"
+        className="blue-text underline"
         target="_blank"
       >
         Unbound Security (YC S24)
@@ -92,8 +92,8 @@ const Intro = () => {
                   Software Engineering Intern at{" "}
                 </p>
                 <Link
-                  href="https://www.unboundsecurity.com"
-                  className="underline"
+                  href="https://www.unboundsecurity.ai"
+                  className="blue-text underline"
                   target="_blank"
                 >
                   Unbound Security (YC S24)
