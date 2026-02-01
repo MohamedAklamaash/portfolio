@@ -12,7 +12,7 @@ import { SiLinkedin } from "react-icons/si";
 
 const CURRENT_SECTION = [
   {
-    start: "Building secure systems at",
+    start: "Previously building secure systems at",
     end: (
       <Link
         href="https://www.unboundsecurity.ai"
@@ -70,7 +70,7 @@ const Landing = () => {
 export default Landing;
 
 const Intro = () => {
-  const container = useRef<HTMLElement | null>(null);
+  const container = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: container,
@@ -80,7 +80,7 @@ const Intro = () => {
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "150vh"]);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div ref={container} className="h-screen overflow-hidden">
       <motion.div style={{ y }} className="h-full relative">
         <div
           className={cn(
@@ -93,7 +93,7 @@ const Intro = () => {
                 <p className="inline">
                   hey, i&apos;m{" "}
                   <span className="bg-green-200 font-medium">Mohamed Aklamaash</span>, a{" "}
-                  Software Engineering Intern at{" "}
+                  Software Engineer who was previously at{" "}
                 </p>
                 <Link
                   href="https://www.unboundsecurity.ai"
@@ -103,7 +103,7 @@ const Intro = () => {
                   Unbound Security (YC S24)
                 </Link>
                 <p className="inline">
-                  {" "}and pursuing M.Sc. Data Science at{" "}
+                  {" "}and currently pursuing M.Sc. Data Science at{" "}
                 </p>
                 <Link
                   href="https://www.psgtech.edu"

@@ -1,0 +1,87 @@
+---
+title: Why I built syncset-db
+description: Because partial database replication shouldn't be a nightmare of manual mapping and brittle scripts.
+date: 2026-01-20
+---
+
+> [syncset-db](https://pypi.org/project/syncset-db/) is a high-performance, resilient PostgreSQL data replication utility designed for selective table and column synchronization. You can [find it on PyPI](https://pypi.org/project/syncset-db/) or [check the code on GitHub](https://github.com/MohamedAklamaash/syncset).
+
+In the world of microservices and distributed systems, data sharing is often the biggest bottleneck. You have a "source of truth" database, but other services only need a specific subset of that data—maybe just a few columns from a handful of tables.
+
+The standard solutions? Either you mirror the entire database (expensive and potentially a security risk), or you write custom, brittle sync scripts that break the moment your schema changes.
+
+I've faced this exact problem multiple times. The friction of keeping data synchronized without over-sharing or constant manual maintenance is real. That's why I built `syncset-db`.
+
+## The Problem
+
+Traditional database replication tools are often "all or nothing." They focus on full database mirroring for failover or load balancing. But modern architectures demand more granularity:
+
+- **Selective Synchronization:** You only need a specific subset of data for a specific service.
+- **Schema Evolution:** When the primary database schema changes, replicas often break or require manual migration.
+- **Resilience:** Basic sync scripts rarely handle crashes, network blips, or partial failures gracefully.
+- **Data Integrity:** Ensuring that the replica hasn't drifted from the primary over time is a manual, error-prone task.
+
+## Enter syncset-db
+
+I wanted to build a utility that makes partial replication as simple as defining a configuration file. Something that is resilient by design and handles the "boring" parts of data movement automatically.
+
+### Selective Table and Column Sync
+
+`syncset-db` allows you to define exactly which tables and, more importantly, which *columns* should be replicated. This ensures that sensitive data stays in the primary while downstream services get exactly what they need and nothing more.
+
+### Automated Schema Evolution
+
+This was a key requirement. `syncset-db` monitors the primary schema and automatically migrates the replica schemas to match. No more manual `ALTER TABLE` commands on five different replica databases every time you add a column to the source.
+
+### Resilience and Performance
+
+Building for production means building for failure. `syncset-db` features:
+- **Crash-safe replication:** Resumes exactly where it left off after an interruption.
+- **Batched Operations:** Uses high-performance batch insert/upsert operations to minimize overhead and maximize throughput.
+- **Drift Detection:** Periodically scans for and corrects inconsistencies between the primary and its replicas.
+
+## Building It
+
+### Tech Stack
+
+- **Python:** For its rich ecosystem of database drivers and ease of scripting.
+- **PostgreSQL:** The primary target for high-performance, enterprise-grade replication.
+- **Docker:** To ensure easy deployment and consistent environments across different infrastructures.
+- **PyPI:** Distributed as a package for easy integration into any Python-based workflow.
+
+### The Challenges
+
+**Resilient Upserts**
+
+Implementing a truly resilient upsert that handles primary key conflicts and partial failures while maintaining high throughput was a significant engineering challenge. I spent a lot of time optimizing the SQL generation for PostgreSQL's `ON CONFLICT` clauses to ensure maximum efficiency.
+
+**Schema Drift Detection**
+
+Efficiently detecting drift without putting a massive load on both databases required a careful strategy. I implemented a hashing-based approach and selective scanning to identify discrepancies without needing to transfer large amounts of data just for comparison.
+
+**Metadata Management**
+
+Keeping track of sync state, last-run timestamps, and schema versions across multiple databases required a robust metadata layer within `syncset-db`. Ensuring this metadata itself is resilient to failures was critical for the package's overall reliability.
+
+## What I Learned
+
+Building `syncset-db` taught me that developer tools should be "invisible." The goal isn't to have a complex dashboard; the goal is to have a utility that you configure once and it just *works*. 
+
+I also gained a much deeper understanding of PostgreSQL's internals, especially regarding system catalogs and high-performance data ingestion techniques.
+
+## Why it Matters
+
+Data is the lifeblood of any system, but uncontrolled data sharing is a liability. `syncset-db` provides the control and reliability needed to share data safely and efficiently. It removes the "sync tax" that often slows down development in distributed environments.
+
+## Try It Out
+
+You can install it via pip:
+```bash
+pip install syncset-db
+```
+
+Check out the documentation and source code on [GitHub](https://github.com/MohamedAklamaash/syncset).
+
+---
+
+`syncset-db` is a reflection of my philosophy on engineering: solve real problems with tools that are resilient, scalable, and simple to use. It's not just about moving data; it's about building trust in your data infrastructure.

@@ -59,8 +59,8 @@ export const EXPERIENCE = [
   {
     company: "Unbound Security",
     role: "Software Engineering Intern",
-    duration: "May 2025 - Present",
-    description: "YC S24 backed security startup. Migrated infrastructure from GCP to AWS (15% cost reduction), optimized secrets detection pipeline, built SQL editor in Django admin, and designed AI prompt analysis system using MD5 hashing.",
+    duration: "May 2025 - Dec 2025",
+    description: "Worked at the intersection of data, engineering, and AI for a YC S24 backed security startup. Migrated infrastructure from GCP to AWS (15% cost reduction), optimized secrets detection pipeline, built SQL editor in Django admin, and designed AI prompt analysis system using MD5 hashing.",
     technologies: ["Python", "Django", "AWS", "GCP", "Docker", "Kubernetes"],
   },
 ];

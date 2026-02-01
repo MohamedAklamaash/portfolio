@@ -46,6 +46,8 @@ export const TECH_STACK: { [key: string]: techStack } = {
   DLP: { title: "DLP", color: COLOR.RED },
   ML: { title: "ML", color: COLOR.VIOLET },
   RAG: { title: "RAG", color: COLOR.GREEN },
+  RL: { title: "RL", color: COLOR.ORANGE },
+  NLP: { title: "NLP", color: COLOR.CYAN },
   FINETUNING: { title: "Fine-tuning", color: COLOR.PINK },
 };
 
@@ -65,6 +67,20 @@ export interface Project {
   shortDescription: string;
 }
 export const PROJECTS_DATA: Project[] = [
+  {
+    title: "syncset-db",
+    shortDescription: "Resilient PostgreSQL data replication utility for selective table and column synchronization.",
+    description: "Designed and implemented a high-performance replication service for PostgreSQL that enables selective synchronization of database subsets. Features automated schema evolution, crash-safe replication, and drift detection to ensure data consistency across distributed systems.",
+    techStack: [
+      TECH_STACK.PYTHON,
+      TECH_STACK.POSTGRESQL,
+      TECH_STACK.DOCKER,
+    ],
+    githubLink: "https://github.com/MohamedAklamaash/syncset",
+    deployedLink: "https://pypi.org/project/syncset-db/",
+    imageSrc: "/projects/syncset.png",
+    isFeatured: true,
+  },
   {
     title: "MANAGE_MONEY",
     shortDescription: "Financial analytics platform with AI transaction parsing and budgeting",
@@ -119,21 +135,6 @@ export const PROJECTS_DATA: Project[] = [
     isFeatured: true,
   },
   {
-    title: "FOOD_VISION",
-    shortDescription: "Deep learning food classification with transfer learning",
-    description:
-      "CNN-driven food recognition system using transfer learning with EfficientNet. Features deep learning image classification, high accuracy across diverse food categories, modular preprocessing pipeline with image augmentation and normalization. Successfully reduced overfitting during training.",
-    techStack: [
-      TECH_STACK.PYTHON,
-      TECH_STACK.TENSORFLOW,
-      TECH_STACK.DEEP_LEARNING,
-    ],
-    githubLink: "https://github.com/MohamedAklamaash/Food_VisionWithCNN",
-    deployedLink: undefined,
-    imageSrc: "/projects/foodvision.png",
-    isFeatured: false,
-  },
-  {
     title: "StubHub",
     shortDescription: "Ticket marketplace for event organizers and attendees",
     description:
@@ -167,21 +168,6 @@ export const PROJECTS_DATA: Project[] = [
     githubLink: "https://github.com/MohamedAklamaash/Friends",
     deployedLink: "https://friends-2.vercel.app/",
     imageSrc: "/projects/friends.png",
-    isFeatured: false,
-  },
-  {
-    title: "Vreudge",
-    shortDescription: "Distributed file system built with Go",
-    description:
-      "Decentralized distributed file system built with Golang. Features decentralized architecture and distributed file storage for reliable and scalable file management.",
-    techStack: [
-      TECH_STACK.GO,
-      TECH_STACK.NETWORKS,
-      TECH_STACK.FTP,
-    ],
-    githubLink: "https://github.com/MohamedAklamaash/Vreudge",
-    deployedLink: undefined,
-    imageSrc: "/projects/vreudge.png",
     isFeatured: false,
   },
   {

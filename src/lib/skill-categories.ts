@@ -24,7 +24,6 @@ export const SKILL_CATEGORIES = [
     skills: [
       TECH_STACK.REACT,
       TECH_STACK.NEXTJS,
-      TECH_STACK.REACT_NATIVE,
     ],
   },
   {
@@ -47,10 +46,10 @@ export const SKILL_CATEGORIES = [
   {
     title: "AI / ML",
     skills: [
-      TECH_STACK.TENSORFLOW,
-      TECH_STACK.GPT,
       TECH_STACK.RAG,
-      TECH_STACK.FINETUNING,
+      TECH_STACK.RL,
+      TECH_STACK.NLP,
+      TECH_STACK.DEEP_LEARNING,
     ],
   },
 ];

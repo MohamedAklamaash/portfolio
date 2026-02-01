@@ -6,10 +6,10 @@ import SlideUpWhenVisible from "./slide-up-when-visible";
 const opacityForBlock = (sectionProgress: number, blockNo: number) => {
   const progress = sectionProgress - blockNo;
   if (progress >= 0 && progress < 1) return 1;
-  
+
   // Ensure first block (image) is always visible on initial load
   if (blockNo === 0 && sectionProgress < 0.5) return 1;
-  
+
   return 0.2;
 };
 
@@ -25,29 +25,29 @@ const CONTENTS = [
     />
   </>,
   <>
-    I&apos;m passionate about building at the intersection of{" "}
-    <span className="bg-cyan text-black">data, engineering, and AI</span> —
-    taking ideas from scratch and turning them into reliable, scalable, and
-    impactful solutions. I thrive in fast-paced environments where curiosity,
-    persistence, and problem-solving matter more than just checking boxes.
+    I architect at the intersection of{" "}
+    <span className="bg-cyan text-black">data, engineering, and AI</span>—converting
+    ambitious ideas into resilient, production-grade solutions. From scaling
+    distributed systems for YC-backed startups to deploying high-performance ML pipelines,
+    I specialize in building infrastructure that is inherently secure and optimized for growth.
   </>,
   <>
-    My technical stack spans{" "}
+    My technical repertoire spans backend architecture with{" "}
     <span className="bg-cyan text-black">
-      backend development (Python, Django, NestJS), ML/AI (PyTorch, LangChain,
-      RAG), and cloud infrastructure (AWS, GCP, Kubernetes, Docker)
-    </span>
-    . I focus on building systems that not only work but scale efficiently and
-    maintain security at their core.
+      Python, Django, and NestJS
+    </span>, AI integration using{" "}
+    <span className="bg-cyan text-black">
+      LangChain and RAG
+    </span>, and cloud-native orchestration across{" "}
+    <span className="bg-cyan text-black">
+      AWS, GCP, Kubernetes, and Docker
+    </span>.
   </>,
   <>
-    Outside of engineering, I&apos;m a competitive chess player with regional
-    tournament experience. Chess shapes how I approach problems —{" "}
-    <span className="bg-cyan text-black">
-      strategically, creatively, and always thinking several moves ahead
-    </span>
-    . This mindset translates directly into how I architect systems and solve
-    complex technical challenges.
+    A competitive chess player at heart, I approach system design as I would a
+    game—strategically, creatively, and always thinking several moves ahead.
+    This tactical mindset drives my ability to solve the most complex engineering
+    puzzles and build systems that stand the test of time.
   </>,
 ];
 
