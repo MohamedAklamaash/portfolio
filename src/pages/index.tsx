@@ -207,19 +207,28 @@ const variants = {
 const OtherLinks = ({ animate }: { animate: boolean }) => {
   return (
     <>
-      {LINKS.map((link) => (
-        <motion.div key={link.title} variants={animate ? variants : {}}>
-          <Button
-            asChild
-            variant="ghost"
-            className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500"
-          >
-            <Link href={link.link}>
-              {link.title}
-            </Link>
-          </Button>
-        </motion.div>
-      ))}
+      {LINKS.map((link) => {
+        const isFile = link.link.endsWith(".pdf");
+        return (
+          <motion.div key={link.title} variants={animate ? variants : {}}>
+            <Button
+              asChild
+              variant="ghost"
+              className="bg-gray-100 text-gray-400 rounded-3xl hover:text-gray-500"
+            >
+              {isFile ? (
+                <a href={link.link} target="_blank" rel="noopener noreferrer">
+                  {link.title}
+                </a>
+              ) : (
+                <Link href={link.link}>
+                  {link.title}
+                </Link>
+              )}
+            </Button>
+          </motion.div>
+        );
+      })}
     </>
   );
 };

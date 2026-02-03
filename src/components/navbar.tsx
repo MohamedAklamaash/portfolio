@@ -78,17 +78,32 @@ const Navbar = () => {
         >
           <span className="h-full w-full rounded-xl bg-neutral-200 backdrop-blur-xl dark:bg-neutral-800" />
         </span>
-        {navItems.map((tab, index) => (
-          <Link
-            key={index}
-            href={tab.href as string}
-            ref={(el) => (tabsRef.current[index] = el)}
-            className="font-base inline-flex cursor-pointer items-center justify-center rounded-full px-4 text-center text-sm transition hover:text-black/80 dark:hover:text-white/80 sm:text-base h-full"
-            onClick={() => setActiveTabIndex(index)}
-          >
-            {tab.icon}
-          </Link>
-        ))}
+        {navItems.map((tab, index) => {
+          const isFile = tab.href.endsWith(".pdf");
+          return isFile ? (
+            <a
+              key={index}
+              href={tab.href as string}
+              ref={(el) => (tabsRef.current[index] = el)}
+              className="font-base inline-flex cursor-pointer items-center justify-center rounded-full px-4 text-center text-sm transition hover:text-black/80 dark:hover:text-white/80 sm:text-base h-full"
+              onClick={() => setActiveTabIndex(index)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {tab.icon}
+            </a>
+          ) : (
+            <Link
+              key={index}
+              href={tab.href as string}
+              ref={(el) => (tabsRef.current[index] = el)}
+              className="font-base inline-flex cursor-pointer items-center justify-center rounded-full px-4 text-center text-sm transition hover:text-black/80 dark:hover:text-white/80 sm:text-base h-full"
+              onClick={() => setActiveTabIndex(index)}
+            >
+              {tab.icon}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
