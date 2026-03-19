@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { SpotlightBorder } from "./ui/spotlight-border";
 
 interface PostCardProps {
-  techStack?: string[];
   title: string;
   description: string;
   slug: string;
@@ -10,17 +8,31 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ title, description, slug }) => {
   return (
-    <SpotlightBorder>
-      <Link
-        href={`/posts/${slug}`}
-        className="text-white inline-flex h-full rounded-md px-2 py-4 md:px-4 md:py-6 items-center w-full"
+    <Link
+      href={`/posts/${slug}`}
+      className="glow-card block p-5 transition-all duration-200 group"
+      style={{ borderRadius: "4px", textDecoration: "none" }}
+    >
+      <p
+        className="font-mono text-sm font-medium mb-2 transition-colors duration-200"
+        style={{ color: "var(--text)" }}
       >
-        <div>
-          <p className="text-xl font-semibold text-sky-200">{title}</p>
-          <p className="text-gray-400">{description}</p>
-        </div>
-      </Link>
-    </SpotlightBorder>
+        {title}
+      </p>
+      <p
+        className="text-xs leading-relaxed"
+        style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
+      >
+        {description}
+      </p>
+      <div
+        className="mt-4 font-mono text-xs flex items-center gap-1 transition-colors duration-200"
+        style={{ color: "var(--text-3)" }}
+      >
+        Read →
+      </div>
+    </Link>
   );
 };
+
 export default PostCard;

@@ -1,5 +1,4 @@
 import SlideUpWhenVisible from "@/components/slide-up-when-visible";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SOCIALS } from "@/lib/constants";
 import { SiGithub, SiLinkedin } from "react-icons/si";
@@ -7,35 +6,98 @@ import { MailIcon } from "lucide-react";
 
 const ContactSection = () => {
   return (
-    <div className="py-24 px-4 text-center">
+    <div
+      className="py-32 px-6"
+      style={{ background: "var(--bg-2)", borderTop: "1px solid var(--border)" }}
+    >
       <SlideUpWhenVisible>
-        <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6">
-          Get in Touch
-        </h2>
-        <p className="text-gray-400 text-lg max-w-xl mx-auto mb-10">
-          Whether you have a question, a project opportunity, or just want to say
-          hi, feel free to drop me a message. I&apos;ll try my best to get back to
-          you!
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href={SOCIALS.email} target="_blank">
-                <Button size="lg" className="gap-2 rounded-full px-8">
-                    <MailIcon className="w-4 h-4" />
-                    Say Hello
-                </Button>
-            </Link>
-        </div>
+        <div className="max-w-5xl mx-auto">
+          {/* Label */}
+          <div className="flex items-center gap-4 mb-10">
+            <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: "var(--text-3)" }}>
+              Contact
+            </span>
+            <span className="h-px w-12" style={{ background: "var(--border)" }} />
+          </div>
 
-        <div className="mt-12 flex justify-center gap-6 text-gray-400">
-            <Link href={SOCIALS.github} target="_blank" className="hover:text-white transition-colors">
-                <SiGithub className="w-6 h-6" />
-                <span className="sr-only">GitHub</span>
-            </Link>
-            <Link href={SOCIALS.linkedin} target="_blank" className="hover:text-white transition-colors">
-                <SiLinkedin className="w-6 h-6" />
-                 <span className="sr-only">LinkedIn</span>
-            </Link>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
+            <div>
+              <h2
+                className="font-display leading-none mb-6"
+                style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", color: "var(--text)" }}
+              >
+                Let&apos;s build<br />
+                <span style={{ color: "var(--amber)", fontStyle: "italic" }}>something.</span>
+              </h2>
+              <p
+                className="max-w-md text-base leading-relaxed"
+                style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
+              >
+                Inbox always open—whether it&apos;s a job oppurtunity, internship, project collabration or just a random question.
+                Got something cool in mind or just bored? Drop a hi, I don&apos;t bite
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <Link href={SOCIALS.email} target="_blank">
+                <button
+                  className="flex items-center gap-3 px-8 py-3.5 font-mono text-sm tracking-wide transition-all duration-200 w-full justify-center"
+                  style={{
+                    background: "var(--amber)",
+                    color: "var(--bg)",
+                    borderRadius: "2px",
+                    fontWeight: 500,
+                  }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#e8bc6a")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--amber)")}
+                >
+                  <MailIcon size={15} />
+                  Say Hello
+                </button>
+              </Link>
+
+              <div className="flex items-center justify-center gap-3">
+                {[
+                  { href: SOCIALS.github, icon: <SiGithub size={18} />, label: "GitHub" },
+                  { href: SOCIALS.linkedin, icon: <SiLinkedin size={18} />, label: "LinkedIn" },
+                ].map(({ href, icon, label }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2.5 font-mono text-xs tracking-wide transition-all duration-200"
+                    style={{
+                      color: "var(--text-3)",
+                      border: "1px solid var(--border-2)",
+                      borderRadius: "2px",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color = "var(--amber)";
+                      (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--amber-dim)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-3)";
+                      (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-2)";
+                    }}
+                  >
+                    {icon}
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer line */}
+          <div className="mt-20 pt-8 flex items-center justify-between" style={{ borderTop: "1px solid var(--border)" }}>
+            <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
+              © 2026 Mohamed Aklamaash
+            </span>
+            <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
+              Built with love by Mohamed Aklamaash
+            </span>
+          </div>
         </div>
       </SlideUpWhenVisible>
     </div>
@@ -43,4 +105,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-

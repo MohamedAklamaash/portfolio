@@ -1,98 +1,92 @@
 import { ScrollContext } from "@/lib/scroll-observer";
 import Image from "next/image";
 import { useContext, useRef } from "react";
-import SlideUpWhenVisible from "./slide-up-when-visible";
 
-const opacityForBlock = (sectionProgress: number, blockNo: number) => {
-  const progress = sectionProgress - blockNo;
-  if (progress >= 0 && progress < 1) return 1;
-
-  // Ensure first block (image) is always visible on initial load
-  if (blockNo === 0 && sectionProgress < 0.5) return 1;
-
-  return 0.2;
+const opacityForBlock = (progress: number, blockNo: number) => {
+  const p = progress - blockNo;
+  if (blockNo === 0 && progress < 0.5) return 1;
+  if (p >= 0 && p < 1) return 1;
+  return 0.15;
 };
 
 const CONTENTS = [
   <>
     <Image
-      className="rounded-xl self-center lg:self-start w-screen sm:w-[85vw] lg:w-[500px] h-auto"
-      width={500}
-      height={500}
+      className="rounded-sm self-center lg:self-start w-full sm:w-[85vw] lg:w-[420px] h-auto"
+      width={420}
+      height={420}
       src="https://res.cloudinary.com/duhkiwuqq/image/upload/v1764422994/images/me_xy339m.png"
       alt="Mohamed Aklamaash"
       priority
+      style={{ filter: "grayscale(20%) contrast(1.05)" }}
     />
   </>,
   <>
-    I architect at the intersection of{" "}
-    <span className="bg-cyan text-black">data, engineering, and AI</span>—converting
-    ambitious ideas into resilient, production-grade solutions. From scaling
-    distributed systems for YC-backed startups to deploying high-performance ML pipelines,
-    I specialize in building infrastructure that is inherently secure and optimized for growth.
+    I genuinely enjoy the process of figuring things out—whether that&apos;s debugging a subtle race condition, understanding why a model underperforms, or learning a new tool from scratch.{" "}
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>I pick things up fast</span>, and I find that the best way to learn is to just build something real with it.
   </>,
   <>
-    My technical repertoire spans backend architecture with{" "}
-    <span className="bg-cyan text-black">
-      Python, Django, and NestJS
-    </span>, AI integration using{" "}
-    <span className="bg-cyan text-black">
-      LangChain and RAG
-    </span>, and cloud-native orchestration across{" "}
-    <span className="bg-cyan text-black">
-      AWS, GCP, Kubernetes, and Docker
-    </span>.
+    So far that&apos;s meant working across{" "}
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Django APIs, NestJS services, Kubernetes deployments, and RAG pipelines</span>
+    —not because I set out to collect tools, but because each project pulled me somewhere new and I followed the curiosity.
   </>,
   <>
-    A competitive chess player at heart, I approach system design as I would a
-    game—strategically, creatively, and always thinking several moves ahead.
-    This tactical mindset drives my ability to solve the most complex engineering
-    puzzles and build systems that stand the test of time.
+    I also play chess, which has mostly taught me patience and that{" "}
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>slowing down to think usually beats moving fast and hoping for the best</span>.
+    I try to carry that into how I approach engineering problems too.
   </>,
 ];
 
 const AboutMe = () => {
   const { scrollY } = useContext(ScrollContext);
-
-  const refContainer = useRef(null);
-
+  const refContainer = useRef<HTMLDivElement>(null);
   const numOfPages = CONTENTS.length;
   let progress = 0;
 
-  const { current: elContainer } = refContainer;
-  if (elContainer) {
-    const { clientHeight, offsetTop } = elContainer;
+  const { current: el } = refContainer;
+  if (el) {
+    const { clientHeight, offsetTop } = el;
     const screenH = window.innerHeight;
     const halfH = screenH / 2;
     const percentY =
-      Math.min(
-        clientHeight + halfH,
-        Math.max(-screenH, scrollY - offsetTop) + halfH,
-      ) / clientHeight;
+      Math.min(clientHeight + halfH, Math.max(-screenH, scrollY - offsetTop) + halfH) / clientHeight;
     progress = Math.min(numOfPages - 0.5, Math.max(0.5, percentY * numOfPages));
   }
 
   return (
-    <div ref={refContainer} className="pt-40 pb-60 bg-black text-[#F9FAFB]">
-      <SlideUpWhenVisible threshold={0.2}>
-        <div className="min-h-dscreen max-w-5xl mx-auto px-4 lg:px-8 pt-24 md:pt-28 lg:pt-36 flex flex-col justify-center items-center text-4xl md:text-5xl lg:text-6xl tracking-tight font-semibold">
-          <div className="leading-[1.15] space-y-4">
-            <p className="mb-2 text-gray-300">⚡️</p>
-            {CONTENTS.map((content, i) => (
-              <div
-                key={i}
-                className={`inline-block`}
-                style={{ opacity: opacityForBlock(progress, i) }}
-              >
-                {content}
-              </div>
-            ))}
-          </div>
+    <div
+      ref={refContainer}
+      className="pt-32 pb-48"
+      style={{ background: "var(--bg-2)" }}
+    >
+      {/* Section label */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 mb-16 flex items-center gap-4">
+        <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: "var(--text-3)" }}>
+          About
+        </span>
+        <span className="h-px flex-1" style={{ background: "var(--border)" }} />
+      </div>
+
+      <div className="min-h-dscreen max-w-5xl mx-auto px-6 lg:px-8 flex flex-col justify-center">
+        <div
+          className="space-y-8 font-display leading-[1.2]"
+          style={{ fontSize: "clamp(1.8rem, 4vw, 3.5rem)", color: "var(--text)" }}
+        >
+          {CONTENTS.map((content, i) => (
+            <div
+              key={i}
+              style={{
+                opacity: opacityForBlock(progress, i),
+                transition: "opacity 0.4s ease",
+              }}
+            >
+              {content}
+            </div>
+          ))}
         </div>
-      </SlideUpWhenVisible>
+      </div>
     </div>
   );
 };
 
 export default AboutMe;
-

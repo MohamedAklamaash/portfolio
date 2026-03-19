@@ -1,56 +1,72 @@
 import { FEATURED_PROJECTS } from "@/lib/projects";
 import ProjectCard from "@/components/project/project-card";
 import SlideUpWhenVisible from "@/components/slide-up-when-visible";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
 const FeaturedProjects = () => {
-  // Limit to top 3 featured projects
   const projects = FEATURED_PROJECTS.slice(0, 3);
 
   return (
-    <div className="py-16 px-4 lg:px-8 max-w-5xl mx-auto">
+    <div className="py-24 px-6 lg:px-8 max-w-5xl mx-auto">
       <SlideUpWhenVisible>
-        <div className="flex justify-between items-end mb-8">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
-              Featured Projects
+            <div className="flex items-center gap-4 mb-4">
+              <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: "var(--text-3)" }}>
+                Selected Work
+              </span>
+              <span className="h-px w-12" style={{ background: "var(--border)" }} />
+            </div>
+            <h2
+              className="font-display leading-none"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--text)" }}
+            >
+              Featured <br className="md:hidden" />
+              <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Projects</span>
             </h2>
-            <p className="text-gray-400">
-              Some of the highlights from my work.
-            </p>
           </div>
-          <Link href="/projects">
-            <Button variant="ghost" className="hidden md:flex items-center gap-2 group">
-              View All 
-              <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+          <Link
+            href="/projects"
+            className="hidden md:flex items-center gap-2 font-mono text-xs tracking-wide group transition-colors duration-200"
+            style={{ color: "var(--text-3)" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--amber)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--text-3)")}
+          >
+            View All
+            <ArrowRightIcon size={12} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                shortDescription={project.shortDescription}
-                isFeatured={project.isFeatured}
-                title={project.title}
-                description={project.description}
-                imageSrc={project.imageSrc}
-                deployedLink={project.deployedLink}
-                githubLink={project.githubLink}
-                techStack={project.techStack}
-              />
-            ))}
-          </div>
-        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              shortDescription={project.shortDescription}
+              isFeatured={project.isFeatured}
+              title={project.title}
+              description={project.description}
+              imageSrc={project.imageSrc}
+              deployedLink={project.deployedLink}
+              githubLink={project.githubLink}
+              techStack={project.techStack}
+            />
+          ))}
+        </div>
+
         <div className="mt-8 md:hidden flex justify-center">
-          <Link href="/projects">
-            <Button variant="outline" className="flex items-center gap-2">
-              View All Projects
-              <ArrowRightIcon className="w-4 h-4" />
-            </Button>
+          <Link
+            href="/projects"
+            className="flex items-center gap-2 font-mono text-xs tracking-wide px-5 py-2.5 transition-all duration-200"
+            style={{
+              color: "var(--text-2)",
+              border: "1px solid var(--border-2)",
+              borderRadius: "2px",
+            }}
+          >
+            View All Projects
+            <ArrowRightIcon size={12} />
           </Link>
         </div>
       </SlideUpWhenVisible>
@@ -59,4 +75,3 @@ const FeaturedProjects = () => {
 };
 
 export default FeaturedProjects;
-

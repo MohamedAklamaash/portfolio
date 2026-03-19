@@ -1,0 +1,66 @@
+---
+title: Why I built Launchpad
+description: I wanted Vercel's simplicity but with my own AWS account. So I built it.
+date: 2026-03-10
+---
+
+> [Launchpad](https://launchpad-five-lilac.vercel.app) is a self-hosted deployment platform that turns a GitHub repository into a running application inside your own AWS account—VPC, ECS cluster, load balancer, and all. [Source on GitHub](https://github.com/MohamedAklamaash/launchpad).
+
+## The frustration that started it
+
+I've deployed a lot of side projects. And every time, I'd hit the same fork in the road: use Vercel (or Railway, or Render) and get a nice experience but pay a premium and hand over control, or go full AWS and spend half a day wiring up ECS, ALBs, ECR, security groups, and IAM roles before writing a single line of actual app code.
+
+Neither felt right. The managed platforms are great until you need something slightly custom, or until the bill arrives. And raw AWS is powerful but the setup cost is real—especially when you just want to ship something.
+
+I wanted a third option: the simplicity of `git push` deploys, but with everything running in my own AWS account. No shared infrastructure. No markup on compute. Full control.
+
+So I built Launchpad.
+
+## What it actually does
+
+The core idea is simple: you give Launchpad an IAM role in your AWS account, point it at a GitHub repo, and it handles everything else.
+
+Under the hood, it provisions a full environment using Terraform—VPC, public and private subnets, NAT gateway, ECS cluster, Application Load Balancer, and ECR registry. All of this lives in *your* account. Launchpad is just the control plane; it never runs your code.
+
+When you deploy an app, it kicks off an 11-step pipeline:
+
+1. Validates your infrastructure is active and AWS credentials are fresh
+2. Triggers a CodeBuild job in your account to build the Docker image
+3. Pushes the image to your ECR
+4. Creates an ECS task definition with your CPU/memory config
+5. Sets up a target group and ALB listener rule for path-based routing
+6. Launches the ECS service and waits for it to stabilise
+
+The whole thing is async—Redis queues for deployment jobs, RabbitMQ for events between services. You get an immediate response and can poll the status while it runs.
+
+## The parts that were harder than expected
+
+**IAM and credential refresh.** The platform assumes a role in your AWS account using `sts:AssumeRole`, which gives temporary credentials with a 1-hour TTL. Long-running Terraform applies or slow ECS stabilisation can outlast those credentials. I had to build auto-refresh logic that detects expiry mid-operation and re-assumes the role transparently.
+
+**ALB target group attachment timing.** There's a race condition between creating a target group and attaching it to the ALB listener. AWS doesn't always reflect the attachment immediately, so I added a 5-second wait plus a verification step before proceeding. Without it, about 20% of deployments would fail silently at the routing step.
+
+**Docker Hub rate limits in CodeBuild.** CodeBuild runs in AWS's shared IP space, which hits Docker Hub's pull rate limits constantly. The fix was switching all base images to ECR Public Gallery (`public.ecr.aws/docker/library/node:21-alpine` instead of `node:21-alpine`). Simple change, completely eliminated the 429 errors.
+
+**Fargate CPU/memory combinations.** Fargate only accepts specific CPU/memory pairs—you can't just pass arbitrary values. I added a rounding function that maps user input to the nearest valid combination, which avoids a confusing class of deployment failures.
+
+**Path-based routing and static files.** When you route `/my-app/*` to a container, the container sees the full path including the prefix. Most apps aren't built to handle that. I added an NGINX sidecar that strips the app-name prefix before forwarding, so apps can define their routes at root without knowing they're behind a path-based rule.
+
+## The architecture
+
+The control plane is split into two Django services: one for infrastructure (provisioning, Terraform state, AWS credentials) and one for applications (deployments, build status, environment variables). They communicate via RabbitMQ events—when infrastructure becomes active, the application service syncs the metadata it needs to start deployments.
+
+The frontend is a React/TypeScript app that talks to a gateway service, which handles auth and routes to the appropriate backend service.
+
+Everything runs in Docker locally and is designed to be self-hosted. The only external dependency is your AWS account.
+
+## What I'd do differently
+
+The current routing model (`/app-name/*`) works but it's not great for apps that use client-side routing or have assets at specific paths. Custom domain support with proper DNS and SSL would be the right fix—it's on the roadmap.
+
+Secret management is also basic right now—environment variables are stored encrypted in the database. Integrating AWS Secrets Manager would be the right move for anything production-facing.
+
+## Why it was worth building
+
+Honestly, I learned more about AWS internals in this project than in anything else I've built. The gap between "I know what ECS is" and "I can programmatically provision a full ECS environment with correct IAM, networking, and routing" is significant. Working through every edge case—credential expiry, ALB timing, Fargate constraints, Docker rate limits—gave me a much more grounded understanding of how these services actually behave.
+
+And the end result is something I actually use. Deploying a new project now takes a few minutes instead of an afternoon.
