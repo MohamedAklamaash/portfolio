@@ -27,7 +27,7 @@ const CONTENTS = [
   </>,
   <>
     So far that&apos;s meant working across{" "}
-    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Django APIs, NestJS services, Kubernetes deployments, and RAG pipelines</span>
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Backend systems, AI/ML pipelines, and cloud infrastructure</span>
     —not because I set out to collect tools, but because each project pulled me somewhere new and I followed the curiosity.
   </>,
   <>
