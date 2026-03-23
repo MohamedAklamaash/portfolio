@@ -58,9 +58,17 @@ export const HERO_LINK_ELEMENTS: LinkElement[] = [
 export const EXPERIENCE = [
   {
     company: "Unbound Security",
+    link: "https://getunbound.ai/",
+    location: "Bengaluru",
     role: "Software Engineering Intern",
     duration: "May 2025 - Dec 2025",
-    description: "Worked at the intersection of data, engineering, and AI for a YC S24 backed security startup. Migrated infrastructure from GCP to AWS (15% cost reduction), optimized secrets detection pipeline, built SQL editor in Django admin, and designed AI prompt analysis system using MD5 hashing.",
+    description: [
+      "Migrated the core product from GCP to AWS, resulting in up to 20% cost reduction while maintaining performance and reliability.",
+      "Revamped the billing system to support invoice-based billing along with per-usage policies.",
+      "Enhanced DLP pipelines to improve data security increasing accuracy over 90%.",
+      "Built a low-latency Notification Service to deliver real-time updates efficiently.",
+      "Improved analytics for AI usage governance, enabling better visibility, control, and compliance across AI systems.",
+    ],
     technologies: ["Python", "Django", "AWS", "GCP", "Docker", "Kubernetes"],
   },
 ];

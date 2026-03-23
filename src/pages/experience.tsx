@@ -54,29 +54,65 @@ const Experience = () => {
                     >
                       {job.role}
                     </h3>
-                    <span
-                      className="font-mono text-xs px-2 py-0.5"
-                      style={{
-                        color: "var(--amber)",
-                        background: "var(--amber-glow)",
-                        border: "1px solid var(--amber-dim)",
-                        borderRadius: "2px",
-                      }}
-                    >
-                      {job.company}
-                    </span>
+                    {job.link ? (
+                      <a
+                        href={job.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-xs px-2 py-0.5 transition-all duration-200 hover:scale-[1.02]"
+                        style={{
+                          color: "var(--amber)",
+                          background: "var(--amber-glow)",
+                          border: "1px solid var(--amber-dim)",
+                          borderRadius: "2px",
+                        }}
+                      >
+                        {job.company}
+                      </a>
+                    ) : (
+                      <span
+                        className="font-mono text-xs px-2 py-0.5"
+                        style={{
+                          color: "var(--amber)",
+                          background: "var(--amber-glow)",
+                          border: "1px solid var(--amber-dim)",
+                          borderRadius: "2px",
+                        }}
+                      >
+                        {job.company}
+                      </span>
+                    )}
                   </div>
-                  <time className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
-                    {job.duration}
-                  </time>
+                  <div className="flex items-center gap-2 font-mono text-xs" style={{ color: "var(--text-3)" }}>
+                    <time>{job.duration}</time>
+                    {job.location && (
+                      <>
+                        <span className="h-1 w-1 rounded-full opacity-30" style={{ background: "currentColor" }} />
+                        <span>{job.location}</span>
+                      </>
+                    )}
+                  </div>
+
                 </div>
 
-                <p
-                  className="text-sm leading-relaxed mb-5"
+                <ul
+                  className="text-sm leading-relaxed mb-5 space-y-3 list-none"
                   style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
                 >
-                  {job.description}
-                </p>
+                  {job.description.map((point: string, i: number) => (
+                    <li key={i} className="flex gap-3">
+                      <span
+                        className="mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0"
+                        style={{
+                          background: "var(--amber)",
+                          boxShadow: "0 0 8px var(--amber-glow-strong)"
+                        }}
+                      />
+                      <span className="flex-1 opacity-90">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+
 
                 <div className="flex flex-wrap gap-2">
                   {job.technologies.map((tech) => (
