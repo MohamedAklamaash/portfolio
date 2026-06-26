@@ -1,0 +1,68 @@
+---
+title: The Same Jailbreak Scored 1.00 and 0.15
+description: In LLM safety, a number you can't reproduce—or whose judge and dataset you can't name—isn't a benchmark. So I built one that is.
+date: 2026-06-26
+---
+
+> [redharness](https://github.com/MohamedAklamaash/redharness) is a standardized, reproducible benchmark for the adversarial robustness of large language models—jailbreak, prompt-injection, and data-leakage evaluation under one methodology. [Source on GitHub](https://github.com/MohamedAklamaash/redharness), with hands-on usage in [`docs/OVERVIEW.md`](https://github.com/MohamedAklamaash/redharness/blob/main/docs/OVERVIEW.md).
+
+## The thing that bothered me
+
+I kept reading LLM-safety papers and finding numbers I couldn't trust. One paper reports a 90% attack success rate, another reports 15% for what sounds like the same attack on the same model, and there's no way to tell whether the difference is the attack, the dataset, or the grader deciding what counts as "success."
+
+It turns out that last one is the killer. Souly et al. showed that weak or permissive judges systematically *inflate* jailbreak success—swap the grader and the headline number moves by tens of points. So "Attack Success Rate" isn't one quantity; it's a different quantity in almost every paper, computed over a different behavior set, scored by a different judge, on a dataset that may have drifted since publication.
+
+The benchmarks that actually stuck—HarmBench, JailbreakBench—didn't win by inventing the strongest attack. They won by *standardizing the evaluation*: fixed behaviors, fixed judges, versioned artifacts, public leaderboards. That's the insight I wanted to generalize. So I built redharness.
+
+## What it actually does
+
+The core thesis is on the tin: **standardize the evaluation, not just the attack.** redharness unifies the three threat surfaces that are measured most inconsistently today—jailbreaks, prompt injection, and data leakage—under one pluggable methodology with a strict reproducibility contract.
+
+Every evaluation is a matrix over five plugin axes, and a run just enumerates the cells and scores each one:
+
+```
+Dataset ─▶ Attack ─▶ Target ─▶ transcript ─▶ Judge ─▶ Metric ─▶ Leaderboard
+(behaviors) (generator) (model)              (scorer)  (aggregate)
+```
+
+- **Target** — the system under test: `generate(messages, tools) -> Response`
+- **Attack** — turns a behavior into adversarial attempts (`static`, `template`, and attacker-LLM methods like PAIR, TAP, Crescendo)
+- **Dataset** — a versioned, hash-pinned set of behaviors or probes
+- **Judge** — decides success and assigns a score per attempt
+- **Metric** — aggregates verdicts into a reported quantity
+
+The agentic injection surface adds two more axes (a sandboxed *Scenario* and the *Injection* itself) and runs a bounded multi-step agent loop, so I can measure not just whether the attacker's goal fired but whether the agent still finished its legitimate task—utility under attack.
+
+The part I care about most: every leaderboard row records a `(dataset_version, judge, metric)` provenance triple. Because judge choice and dataset version are the dominant sources of cross-study disagreement, binding them to every number is the whole anti-fragmentation mechanism.
+
+## The result that made the point for me
+
+Once the harness could run against a real model, it reproduced the judge-sensitivity problem on the first try. Evaluating `claude-haiku-4-5` (with `gpt-4o-mini` as attacker and grader) on commit-pinned public sets:
+
+- **AdvBench, direct:** `asr 0.00`, `refusal_rate 1.00`—an aligned model refuses direct harmful requests. That's the undefended baseline.
+- **AdvBench, PAIR:** the attack jailbreaks through. But scoring the *same transcripts*, the string-match judge reports `asr 1.00` while the StrongREJECT rubric grader reports `asr 0.15`—a ~6.7× gap from nothing but the choice of judge.
+- **XSTest, safe split:** `frr 0.00`—no over-refusal of benign prompts.
+
+That PAIR cell is the entire argument in one row. The "true" attack success rate is meaningless without naming the grader, and redharness has a `judge-agreement` tool (per-judge ASR plus Cohen's κ) built specifically to surface it.
+
+## The parts that were harder than expected
+
+**Making it reproducible by default.** A benchmark nobody can re-run is just an anecdote. Datasets are content-addressed and hash-verified before use, execution is deterministically seeded, and attempts are cached on their *fully resolved* parameters—so changing a parameter never silently reuses a stale result. The full prompt/response transcript of every attempt is persisted as JSONL for audit, and a single command reproduces any leaderboard row.
+
+**Staying safe to ship publicly.** I wanted the mechanics to be exercisable by anyone without distributing anything harmful. So all bundled content is realistic but responsibly synthetic—refusal probes phrased as the *request* only (never the harmful answer), benign sentinel attacker goals, and obviously-fake secrets (`*.example.invalid` PII, `555-01xx` numbers, `CANARY-…` sentinels). CBRN and explosives content is excluded entirely. Real corpora like AdvBench and HarmBench attach only behind an explicit, hash-verified opt-in.
+
+**Plugins without arbitrary code execution.** Plugins self-register and resolve by name from declarative YAML through a *closed registry*—a dictionary lookup, never dynamic import or `eval`. A config file can select components but can never execute arbitrary code. The leaderboard dashboard, likewise, treats every submitted result as untrusted input.
+
+**Keeping the core lean.** The offline core imports and runs with no extras and no network—no API keys needed for the bundled evaluations, identical results across machines. Network-heavy frameworks (PAIR, TAP, garak, PyRIT) and live model adapters live behind dependency extras, and a CI tripwire enforces that the offline path never quietly grows a network dependency.
+
+## What I learned
+
+The most useful thing wasn't an attack technique—it was internalizing how fragile empirical claims are when the measurement apparatus isn't pinned down. Designing the provenance triple forced me to be precise about what a "result" even *is*: not a number, but a number plus the exact dataset, judge, and metric that produced it.
+
+I also got a much more concrete understanding of the LLM-safety literature—HarmBench, JailbreakBench, StrongREJECT, PAIR/TAP, Secret Sharer canaries, the OWASP LLM Top 10—because integrating each as a first-class, comparable component meant actually understanding what it measures and why.
+
+## Why it matters
+
+A practitioner should be able to answer one basic question: *"Is model A safer than model B, by how much, under which threat model—and can anyone reproduce that number?"* Right now, across most published work, they can't. redharness is my attempt to make that question have a reproducible, provenance-tracked answer—and to give injection and leakage the same versioned, judge-explicit treatment that jailbreaks already got.
+
+It's a defensive evaluation tool, built for authorized safety testing and research. The goal isn't a stronger attack. It's a number you can actually trust.
