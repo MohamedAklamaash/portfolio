@@ -33,8 +33,8 @@ const ContactSection = () => {
                 className="max-w-md text-base leading-relaxed"
                 style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
               >
-                Inbox always open—whether it&apos;s a job oppurtunity, internship, project collabration or just a random question.
-                Got something cool in mind or just bored? Drop a hi, I don&apos;t bite
+                Inbox always open—whether it&apos;s a job opportunity, internship, project collaboration, or just a random question.
+                Got something cool in mind, or just bored? Drop a hi, I don&apos;t bite.
               </p>
             </div>
 
@@ -94,9 +94,17 @@ const ContactSection = () => {
             <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
               © 2026 Mohamed Aklamaash
             </span>
-            <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
-              Built with love by Mohamed Aklamaash
-            </span>
+            <a
+              href="https://github.com/MohamedAklamaash/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs transition-colors duration-200"
+              style={{ color: "var(--text-3)" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--amber)")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--text-3)")}
+            >
+              Source on GitHub
+            </a>
           </div>
         </div>
       </SlideUpWhenVisible>

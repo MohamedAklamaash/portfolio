@@ -12,6 +12,17 @@ body {
   box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 :root {
   --bg: #0e0e0e;
   --bg-2: #141414;
@@ -22,7 +33,7 @@ body {
   --border-2: #333;
   --text: #e8e4dc;
   --text-2: #a09a8e;
-  --text-3: #5a5550;
+  --text-3: #8a8278;
   --amber: #d4a853;
   --amber-dim: #a07830;
   --amber-glow: rgba(212, 168, 83, 0.12);

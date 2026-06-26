@@ -30,12 +30,12 @@ const nextConfig = {
       },
       {
         source: "/college",
-        destination: "https://www.iitm.ac.in/",
+        destination: "https://www.psgtech.edu",
         permanent: true,
       },
       {
         source: "/github",
-        destination: "https://github.com/zeus-12",
+        destination: "https://github.com/MohamedAklamaash",
         permanent: true,
       },
     ];

@@ -1,6 +1,6 @@
 import { allContents } from "contentlayer/generated";
 
-const URL = "https://your-portfolio-url.com";
+const URL = "https://aklamaash.me";
 const PAGES = ["", "/projects", "/posts"];
 
 function generateSiteMap() {

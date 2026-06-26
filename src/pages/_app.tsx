@@ -51,6 +51,8 @@ const instrumentSans = Instrument_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
+    // Respect users who prefer reduced motion — skip smooth-scroll entirely.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis();
     function raf(time: number) {
       lenis.raf(time);
