@@ -1,30 +1,25 @@
 export const SEO = {
-  title: "Mohamed Aklamaash — Software Engineer",
+  title: "Mohamed Aklamaash — AI/ML & Software Engineer",
   titleTemplate: "%s | Mohamed Aklamaash",
   description:
-    "Software Engineer specializing in scalable backend systems, ML/AI pipelines, and cloud infrastructure. Previously at Unbound Security (YC S24).",
+    "AI/ML and software engineer. I train language models from scratch, build LLM-safety benchmarks, and run the backend and cloud infrastructure behind them. Currently at Unbound Security (YC S24).",
   canonical: "https://aklamaash.me",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://aklamaash.me",
     siteName: "Mohamed Aklamaash",
-    title: "Mohamed Aklamaash — Software Engineer",
+    title: "Mohamed Aklamaash — AI/ML & Software Engineer",
     description:
-      "Software Engineer specializing in scalable backend systems, ML/AI pipelines, and cloud infrastructure. Previously at Unbound Security (YC S24).",
+      "AI/ML and software engineer. I train language models from scratch, build LLM-safety benchmarks, and run the backend and cloud infrastructure behind them. Currently at Unbound Security (YC S24).",
     images: [
       {
-        url: "https://res.cloudinary.com/duhkiwuqq/image/upload/v1764422994/images/me_xy339m.png",
+        url: "https://aklamaash.me/me.png",
         width: 1200,
         height: 630,
         alt: "Mohamed Aklamaash",
       },
     ],
-  },
-  twitter: {
-    handle: "@aklamaash",
-    site: "@aklamaash",
-    cardType: "summary_large_image",
   },
   additionalMetaTags: [
     { name: "viewport", content: "width=device-width, initial-scale=1.0" },
@@ -34,7 +29,7 @@ export const SEO = {
     {
       name: "keywords",
       content:
-        "Mohamed Aklamaash, Software Engineer, Backend, ML, AI, Cloud, Python, Django, NestJS, AWS, Kubernetes",
+        "Mohamed Aklamaash, AI Research, ML research, LLM, AI safety, LLM red-teaming, reinforcement learning, PyTorch, transformers, Software Engineer, SRE, distributed systems, Backend, Cloud, Python, Django, AWS, Kubernetes",
     },
   ],
   additionalLinkTags: [

@@ -15,7 +15,7 @@ const CONTENTS = [
       className="rounded-sm self-center lg:self-start w-full sm:w-[85vw] lg:w-[420px] h-auto"
       width={420}
       height={420}
-      src="https://res.cloudinary.com/duhkiwuqq/image/upload/v1764422994/images/me_xy339m.png"
+      src="/me.png"
       alt="Mohamed Aklamaash"
       priority
       style={{ filter: "grayscale(20%) contrast(1.05)" }}
@@ -23,12 +23,12 @@ const CONTENTS = [
   </>,
   <>
     I genuinely enjoy the process of figuring things out—whether that&apos;s debugging a subtle race condition, understanding why a model underperforms, or learning a new tool from scratch.{" "}
-    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>I pick things up fast</span>, and I find that the best way to learn is to just build something real with it.
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Most of what I&apos;ve built started as &ldquo;I wonder how this actually works&rdquo;</span>—and the fastest way I&apos;ve found to answer that is to build the real thing.
   </>,
   <>
-    So far that&apos;s meant working across{" "}
-    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>Backend systems, AI/ML pipelines, and cloud infrastructure</span>
-    —not because I set out to collect tools, but because each project pulled me somewhere new and I followed the curiosity.
+    Lately that&apos;s meant going deep on{" "}
+    <span style={{ color: "var(--amber)", fontStyle: "italic" }}>LLM internals—training models from scratch, adversarial evaluation, and multi-agent systems</span>
+    —alongside the backend and cloud infrastructure that runs them. Not because I set out to collect tools, but because each project pulled me somewhere new and I followed the curiosity.
   </>,
   <>
     I also play chess, which has mostly taught me patience and that{" "}

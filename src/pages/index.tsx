@@ -103,11 +103,11 @@ const Intro = () => {
                 background: "var(--amber-glow)",
               }}
             >
-              Software Engineer
+              AI / ML &amp; Software Engineer
             </span>
             <span className="h-px w-8" style={{ background: "var(--border-2)" }} />
             <span className="font-mono text-xs tracking-wide" style={{ color: "var(--text-3)" }}>
-              Backend · ML/AI · Cloud
+              Backend · ML Systems · Cloud
             </span>
           </motion.div>
 
@@ -141,15 +141,17 @@ const Intro = () => {
             className="max-w-md text-base leading-[1.65] mb-8"
             style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
           >
-            Previously building secure systems at{" "}
+            I build and study ML systems — training language models from scratch,
+            benchmarking LLM adversarial robustness, and running the cloud
+            infrastructure that ships them. Currently building AI security at{" "}
             <a href="https://www.unboundsecurity.ai" target="_blank" rel="noopener noreferrer" className="link-amber">
               Unbound Security (YC S24)
             </a>
-            . Pursuing M.Sc. Data Science at{" "}
+            ; pursuing an integrated M.Sc. in Data Science at{" "}
             <a href="https://www.psgtech.edu" target="_blank" rel="noopener noreferrer" className="link-amber">
               PSG College of Technology
             </a>
-            .
+            {" "}(expected 2027).
           </motion.p>
 
           {/* Status dot */}
@@ -159,7 +161,7 @@ const Intro = () => {
               style={{ background: "var(--green)", boxShadow: "0 0 6px var(--green)" }}
             />
             <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
-              Available for opportunities
+              Open to AI/ML &amp; backend / SRE roles
             </span>
           </motion.div>
 
