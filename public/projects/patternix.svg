@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 338" width="600" height="338" role="img" aria-label="patternix — streaming pattern mining">
+  <defs>
+    <pattern id="pxgrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1" fill="#232323"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="338" fill="#141414"/>
+  <rect width="600" height="338" fill="url(#pxgrid)"/>
+  <text x="28" y="44" fill="#8a8378" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="3.5">STREAM PATTERN MINING</text>
+
+  <!-- incoming stream of items -->
+  <g fill="#6e5a2f">
+    <circle cx="40" cy="150" r="4"/>
+    <circle cx="78" cy="166" r="4"/>
+    <circle cx="116" cy="146" r="4"/>
+    <circle cx="154" cy="170" r="4"/>
+  </g>
+  <line x1="30" y1="158" x2="196" y2="158" stroke="#3a3326" stroke-width="1.4" stroke-dasharray="3 5"/>
+
+  <!-- sliding window -->
+  <rect x="200" y="112" width="150" height="96" rx="4" fill="rgba(212,168,83,0.05)" stroke="#d4a853" stroke-width="1.8"/>
+  <text x="275" y="100" fill="#8a8378" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">sliding window</text>
+  <g fill="#d4a853">
+    <circle cx="228" cy="160" r="4"/>
+    <circle cx="262" cy="144" r="4"/>
+    <circle cx="296" cy="172" r="4"/>
+    <circle cx="324" cy="152" r="4"/>
+  </g>
+
+  <!-- top-k bars -->
+  <g transform="translate(396,112)">
+    <line x1="0" y1="0" x2="0" y2="96" stroke="#2a2a2a" stroke-width="1.4"/>
+    <line x1="0" y1="96" x2="150" y2="96" stroke="#2a2a2a" stroke-width="1.4"/>
+    <rect x="14" y="26" width="26" height="70" fill="#d4a853"/>
+    <rect x="56" y="48" width="26" height="48" fill="#a0822f"/>
+    <rect x="98" y="64" width="26" height="32" fill="#6e5a2f"/>
+    <text x="75" y="-12" fill="#d4a853" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">top-k</text>
+  </g>
+
+  <text x="28" y="316" fill="#d4a853" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5">reservoir sampling · sliding-window · decay</text>
+</svg>

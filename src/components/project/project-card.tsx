@@ -1,6 +1,5 @@
 import SlideUpWhenVisible from "@/components/slide-up-when-visible";
 import { PROJECTS_DATA } from "@/lib/projects";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -16,6 +15,8 @@ const ProjectCard: FC<ProjectCardProps> = ({
   title,
   imageSrc,
   techStack,
+  track,
+  metric,
 }) => {
   return (
     <SlideUpWhenVisible>
@@ -23,25 +24,65 @@ const ProjectCard: FC<ProjectCardProps> = ({
         className="glow-card group flex flex-col overflow-hidden h-full"
         style={{ borderRadius: "4px" }}
       >
-        {/* Image */}
-        <div
-          className="relative w-full overflow-hidden"
-          style={{ aspectRatio: "16/9", background: "var(--surface-2)" }}
-        >
-          <Image
-            src={imageSrc}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            alt={title}
-            width={600}
-            height={338}
-            style={{ filter: "grayscale(15%) contrast(1.05)" }}
-          />
-          {/* Overlay on hover */}
+        {/* Header: image when available, otherwise a text-forward research band */}
+        {imageSrc ? (
           <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ background: "rgba(212,168,83,0.06)" }}
-          />
-        </div>
+            className="relative w-full overflow-hidden"
+            style={{ aspectRatio: "16/9", background: "var(--surface-2)" }}
+          >
+            {imageSrc.endsWith(".svg") ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={imageSrc}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                alt={title}
+              />
+            ) : (
+              <Image
+                src={imageSrc}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                alt={title}
+                width={600}
+                height={338}
+                style={{ filter: "grayscale(15%) contrast(1.05)" }}
+              />
+            )}
+            {/* Overlay on hover */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: "rgba(212,168,83,0.06)" }}
+            />
+          </div>
+        ) : (
+          <div
+            className="relative w-full overflow-hidden flex flex-col justify-between p-5"
+            style={{
+              aspectRatio: "16/9",
+              background: "var(--surface-2)",
+              borderBottom: "1px solid var(--border)",
+            }}
+          >
+            <span
+              className="font-mono text-[10px] tracking-[0.25em] uppercase"
+              style={{ color: "var(--text-3)" }}
+            >
+              {track === "research" ? "Research" : "Software"}
+            </span>
+            {metric && (
+              <p
+                className="font-mono text-xs leading-relaxed"
+                style={{ color: "var(--amber)" }}
+              >
+                {metric}
+              </p>
+            )}
+            {/* Overlay on hover */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{ background: "rgba(212,168,83,0.06)" }}
+            />
+          </div>
+        )}
 
         {/* Content */}
         <div className="p-5 flex flex-col flex-grow" style={{ background: "var(--surface)" }}>

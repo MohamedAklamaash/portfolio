@@ -2,6 +2,19 @@ import { TECH_STACK } from "./projects";
 
 export const SKILL_CATEGORIES = [
   {
+    title: "AI / ML Research",
+    skills: [
+      TECH_STACK.PYTORCH,
+      TECH_STACK.TRANSFORMERS,
+      TECH_STACK.LLM,
+      TECH_STACK.RL,
+      TECH_STACK.PPO,
+      TECH_STACK.EVAL,
+      TECH_STACK.NLP,
+      TECH_STACK.DEEP_LEARNING,
+    ],
+  },
+  {
     title: "Languages",
     skills: [
       TECH_STACK.TYPESCRIPT,
@@ -44,12 +57,12 @@ export const SKILL_CATEGORIES = [
     ],
   },
   {
-    title: "AI / ML",
+    title: "Applied AI",
     skills: [
       TECH_STACK.RAG,
-      TECH_STACK.RL,
-      TECH_STACK.NLP,
-      TECH_STACK.DEEP_LEARNING,
+      TECH_STACK.EMBEDDINGS,
+      TECH_STACK.AI_SAFETY,
+      TECH_STACK.OCR,
     ],
   },
 ];

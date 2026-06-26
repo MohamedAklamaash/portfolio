@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 338" width="600" height="338" role="img" aria-label="redharness — LLM red-teaming benchmark">
+  <defs>
+    <pattern id="rhgrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1" fill="#232323"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="338" fill="#141414"/>
+  <rect width="600" height="338" fill="url(#rhgrid)"/>
+  <text x="28" y="44" fill="#8a8378" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="3.5">RED-TEAMING</text>
+
+  <!-- shield -->
+  <g transform="translate(330,168)">
+    <path d="M0,-72 L62,-48 L62,8 C62,46 33,70 0,84 C-33,70 -62,46 -62,8 L-62,-48 Z" fill="rgba(212,168,83,0.05)" stroke="#d4a853" stroke-width="2.5"/>
+    <circle r="15" fill="none" stroke="#d4625a" stroke-width="1.6"/>
+    <line x1="-24" y1="0" x2="-17" y2="0" stroke="#d4625a" stroke-width="1.6"/>
+    <line x1="17" y1="0" x2="24" y2="0" stroke="#d4625a" stroke-width="1.6"/>
+    <line x1="0" y1="-24" x2="0" y2="-17" stroke="#d4625a" stroke-width="1.6"/>
+    <line x1="0" y1="17" x2="0" y2="24" stroke="#d4625a" stroke-width="1.6"/>
+  </g>
+
+  <!-- three incoming probes (threat surfaces) -->
+  <g stroke="#6e5a2f" stroke-width="1.5">
+    <line x1="120" y1="116" x2="232" y2="148"/>
+    <line x1="108" y1="168" x2="224" y2="168"/>
+    <line x1="120" y1="220" x2="232" y2="188"/>
+  </g>
+  <g fill="#d4625a">
+    <circle cx="118" cy="116" r="3.5"/>
+    <circle cx="106" cy="168" r="3.5"/>
+    <circle cx="118" cy="220" r="3.5"/>
+  </g>
+
+  <text x="28" y="312" fill="#d4a853" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5">jailbreak · prompt-injection · data-leakage</text>
+</svg>

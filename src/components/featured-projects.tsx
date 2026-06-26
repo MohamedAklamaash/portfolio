@@ -4,9 +4,12 @@ import SlideUpWhenVisible from "@/components/slide-up-when-visible";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
-const FeaturedProjects = () => {
-  const projects = FEATURED_PROJECTS.slice(0, 3);
+const TRACKS: { key: "research" | "software"; label: string }[] = [
+  { key: "research", label: "Research" },
+  { key: "software", label: "Software" },
+];
 
+const FeaturedProjects = () => {
   return (
     <div className="py-24 px-6 lg:px-8 max-w-5xl mx-auto">
       <SlideUpWhenVisible>
@@ -39,20 +42,43 @@ const FeaturedProjects = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.title}
-              shortDescription={project.shortDescription}
-              isFeatured={project.isFeatured}
-              title={project.title}
-              description={project.description}
-              imageSrc={project.imageSrc}
-              deployedLink={project.deployedLink}
-              githubLink={project.githubLink}
-              techStack={project.techStack}
-            />
-          ))}
+        <div className="space-y-16">
+          {TRACKS.map(({ key, label }) => {
+            const tracked = FEATURED_PROJECTS.filter((p) => p.track === key);
+            if (tracked.length === 0) return null;
+            return (
+              <div key={key}>
+                {/* Track label */}
+                <div className="flex items-center gap-4 mb-6">
+                  <span
+                    className="font-mono text-xs tracking-[0.2em] uppercase"
+                    style={{ color: "var(--text-2)" }}
+                  >
+                    {label}
+                  </span>
+                  <span className="h-px flex-1" style={{ background: "var(--border)" }} />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {tracked.map((project) => (
+                    <ProjectCard
+                      key={project.title}
+                      shortDescription={project.shortDescription}
+                      isFeatured={project.isFeatured}
+                      title={project.title}
+                      description={project.description}
+                      imageSrc={project.imageSrc}
+                      deployedLink={project.deployedLink}
+                      githubLink={project.githubLink}
+                      techStack={project.techStack}
+                      track={project.track}
+                      metric={project.metric}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-8 md:hidden flex justify-center">

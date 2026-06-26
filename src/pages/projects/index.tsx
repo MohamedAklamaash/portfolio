@@ -5,6 +5,11 @@ import { SearchIcon } from "lucide-react";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
+const TRACK_GROUPS: { key: "research" | "software"; label: string }[] = [
+  { key: "research", label: "Research" },
+  { key: "software", label: "Software" },
+];
+
 const Projects = () => {
   const [query, setQuery] = useState("");
   const [projects, setProjects] = useState(PROJECTS_DATA);
@@ -71,23 +76,43 @@ const Projects = () => {
           </div>
         </SlideUpWhenVisible>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto space-y-16">
           {projects.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.title}
-                  shortDescription={project.shortDescription}
-                  isFeatured={project.isFeatured}
-                  title={project.title}
-                  description={project.description}
-                  imageSrc={project.imageSrc}
-                  deployedLink={project.deployedLink}
-                  githubLink={project.githubLink}
-                  techStack={project.techStack}
-                />
-              ))}
-            </div>
+            TRACK_GROUPS.map(({ key, label }) => {
+              const items = projects.filter((p) => p.track === key);
+              if (items.length === 0) return null;
+              return (
+                <div key={key}>
+                  {/* Track label */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <span
+                      className="font-mono text-xs tracking-[0.2em] uppercase"
+                      style={{ color: "var(--text-2)" }}
+                    >
+                      {label}
+                    </span>
+                    <span className="h-px flex-1" style={{ background: "var(--border)" }} />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {items.map((project) => (
+                      <ProjectCard
+                        key={project.title}
+                        shortDescription={project.shortDescription}
+                        isFeatured={project.isFeatured}
+                        title={project.title}
+                        description={project.description}
+                        imageSrc={project.imageSrc}
+                        deployedLink={project.deployedLink}
+                        githubLink={project.githubLink}
+                        techStack={project.techStack}
+                        track={project.track}
+                        metric={project.metric}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })
           ) : (
             <p className="font-mono text-sm" style={{ color: "var(--text-3)" }}>
               No projects matching &quot;{query}&quot;.
