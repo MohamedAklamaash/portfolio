@@ -262,6 +262,23 @@ pre[class*="language-"] {
   box-shadow: 0 0 24px var(--amber-glow);
 }
 
+/* Project screenshot duotone — unifies colorful app shots with the amber palette.
+   Muted, amber-toned monochrome by default; resolves to full colour on hover. */
+.project-shot {
+  filter: grayscale(1) sepia(0.4) saturate(1.25) brightness(0.82) contrast(1.05);
+  transition: filter 0.6s ease, transform 0.7s ease;
+}
+
+.group:hover .project-shot {
+  filter: grayscale(0) sepia(0) saturate(1) brightness(0.96) contrast(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-shot {
+    transition: none;
+  }
+}
+
 /* Tag pill */
 .tag-pill {
   font-family: var(--font-mono);

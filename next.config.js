@@ -23,6 +23,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Default landing → Software track. Kept non-permanent while the new
+      // structure settles; flip to permanent once confirmed.
+      { source: "/", destination: "/software", permanent: false },
+      // Back-compat for old top-level routes → default (Software) track.
+      { source: "/projects", destination: "/software/projects", permanent: false },
+      { source: "/experience", destination: "/software/experience", permanent: false },
+      { source: "/skills", destination: "/software/skills", permanent: false },
       {
         source: "/resume",
         destination: "/resume.pdf",

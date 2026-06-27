@@ -1,29 +1,21 @@
-import AboutMe from "@/components/about-me";
-import FeaturedProjects from "@/components/featured-projects";
-import ContactSection from "@/components/contact-section";
 import Link from "@/components/ui/link";
+import Terminal from "@/components/terminal/terminal";
 import { SOCIALS } from "@/lib/constants";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
+import { TRACKS, type TrackId } from "@/lib/tracks";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "motion/react";
 import { useRef, useEffect } from "react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { MailIcon, ArrowDownIcon } from "lucide-react";
 
-const Landing = () => (
-  <>
-    <Intro />
-    <AboutMe />
-    <FeaturedProjects />
-    <ContactSection />
-  </>
-);
-
-export default Landing;
-
 const container = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
 const item = {
@@ -31,13 +23,16 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const Intro = () => {
+const Intro = ({ track }: { track: TrackId }) => {
+  const cfg = TRACKS[track];
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "35vh"]);
   const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
 
-  // Subtle mouse-parallax for the ambient glow
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const glowX = useSpring(mouseX, { stiffness: 60, damping: 20 });
@@ -53,11 +48,7 @@ const Intro = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen overflow-hidden relative"
-      style={{ background: "var(--bg)" }}
-    >
+    <div ref={containerRef} className="h-screen overflow-hidden relative" style={{ background: "var(--bg)" }}>
       {/* Mouse-tracked ambient glow */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -86,83 +77,61 @@ const Intro = () => {
       <div className="absolute bottom-20 left-8 w-12 h-12 pointer-events-none" style={{ borderBottom: "1px solid var(--border-2)", borderLeft: "1px solid var(--border-2)" }} />
       <div className="absolute bottom-20 right-8 w-12 h-12 pointer-events-none" style={{ borderBottom: "1px solid var(--border-2)", borderRight: "1px solid var(--border-2)" }} />
 
+      {/* Live terminal — anchors the empty right column on large screens.
+          z-10 so it sits above the (full-width) content column and stays interactive. */}
       <motion.div
         style={{ y, opacity }}
-        className="h-full flex flex-col justify-start pt-32 md:justify-center md:pt-0 px-6 md:px-16 lg:px-24 max-w-6xl mx-auto"
+        className="hidden xl:block absolute right-24 top-1/2 -translate-y-1/2 z-10"
+      >
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Terminal embedded className="w-[23rem] h-[330px]" />
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-[2] h-full flex flex-col justify-start pt-32 md:justify-center md:pt-0 px-6 md:px-16 lg:px-24 max-w-6xl mx-auto"
       >
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col">
-
           {/* Role badge */}
           <motion.div variants={item} className="flex items-center gap-3 mb-8">
             <span
               className="font-mono text-xs tracking-[0.18em] uppercase px-3 py-1"
-              style={{
-                color: "var(--amber)",
-                border: "1px solid var(--amber-dim)",
-                borderRadius: "2px",
-                background: "var(--amber-glow)",
-              }}
+              style={{ color: "var(--amber)", border: "1px solid var(--amber-dim)", borderRadius: "2px", background: "var(--amber-glow)" }}
             >
-              AI / ML &amp; Software Engineer
+              {cfg.badge}
             </span>
             <span className="h-px w-8" style={{ background: "var(--border-2)" }} />
             <span className="font-mono text-xs tracking-wide" style={{ color: "var(--text-3)" }}>
-              Backend · ML Systems · Cloud
+              {cfg.subhead}
             </span>
           </motion.div>
 
           <div className="overflow-hidden mb-1">
-            <motion.h1
-              variants={item}
-              className="font-display leading-[0.92]"
-              style={{ fontSize: "clamp(4.2rem, 16vw, 10rem)", color: "var(--text)" }}
-            >
+            <motion.h1 variants={item} className="font-display leading-[0.92]" style={{ fontSize: "clamp(4.2rem, 16vw, 10rem)", color: "var(--text)" }}>
               Mohamed
             </motion.h1>
           </div>
           <div className="overflow-hidden mb-6">
-            <motion.h1
-              variants={item}
-              className="leading-[0.92]"
-              style={{
-                fontSize: "clamp(4.2rem, 16vw, 10rem)",
-                color: "var(--amber)",
-                fontStyle: "italic",
-                fontFamily: "var(--font-serif)"
-              }}
-            >
+            <motion.h1 variants={item} className="leading-[0.92]" style={{ fontSize: "clamp(4.2rem, 16vw, 10rem)", color: "var(--amber)", fontStyle: "italic", fontFamily: "var(--font-serif)" }}>
               Aklamaash
             </motion.h1>
           </div>
 
           {/* Bio */}
-          <motion.p
-            variants={item}
-            className="max-w-md text-base leading-[1.65] mb-8"
-            style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
-          >
-            I build ML systems and the backends that run them — I&apos;ve trained
-            small language models from scratch, built a benchmark for LLM adversarial
-            robustness, and spend most of my time across backend and cloud
-            infrastructure. Currently working on AI security at{" "}
-            <a href="https://www.unboundsecurity.ai" target="_blank" rel="noopener noreferrer" className="link-amber">
-              Unbound Security (YC S24)
-            </a>
-            , and pursuing an integrated M.Sc. in Data Science at{" "}
-            <a href="https://www.psgtech.edu" target="_blank" rel="noopener noreferrer" className="link-amber">
-              PSG College of Technology
-            </a>
-            {" "}(expected 2027).
+          <motion.p variants={item} className="max-w-md text-base leading-[1.65] mb-8" style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}>
+            {cfg.heroBio}
           </motion.p>
 
           {/* Status dot */}
           <motion.div variants={item} className="flex items-center gap-2 mb-10">
-            <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "var(--green)", boxShadow: "0 0 6px var(--green)" }}
-            />
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--green)", boxShadow: "0 0 6px var(--green)" }} />
             <span className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
-              Open to AI/ML &amp; backend / SRE roles
+              {cfg.statusLine}
             </span>
           </motion.div>
 
@@ -213,17 +182,13 @@ const Intro = () => {
       </motion.div>
 
       {/* Scroll cue */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
-      >
-        <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-        >
+      <motion.div style={{ opacity }} className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}>
           <ArrowDownIcon size={13} style={{ color: "var(--text-3)" }} />
         </motion.div>
       </motion.div>
     </div>
   );
 };
+
+export default Intro;

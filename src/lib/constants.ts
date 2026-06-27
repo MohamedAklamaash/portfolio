@@ -55,7 +55,24 @@ export const HERO_LINK_ELEMENTS: LinkElement[] = [
   },
 ];
 
-export const EXPERIENCE = [
+type ExpTrack = "software" | "ai-ml" | "both";
+
+interface ExperienceBullet {
+  text: string;
+  track: ExpTrack;
+}
+
+interface ExperienceItem {
+  company: string;
+  link?: string;
+  location?: string;
+  role: string;
+  duration: string;
+  description: ExperienceBullet[];
+  technologies: string[];
+}
+
+export const EXPERIENCE: ExperienceItem[] = [
   {
     company: "Unbound Security",
     link: "https://getunbound.ai/",
@@ -63,9 +80,18 @@ export const EXPERIENCE = [
     role: "AI / Software Engineering Intern (Summer)",
     duration: "May 2026 - Jun 2026",
     description: [
-      "Built secrets-detection (DLP) scanning into the enterprise AI-security platform with TruffleHog, reaching 97% recall and 94% F1, and drove a false-positive-reduction effort that cut alert noise for security teams.",
-      "Fixed a classifier field-name inconsistency (path / files / paths) that was causing silent policy misses, closing a coverage gap in DLP and policy enforcement.",
-      "Integrated Authentik (SSO/IdP) into the authentication flow to support enterprise on-prem / customer-cloud (BYOC) deployments, and instrumented services with Prometheus and Grafana for production observability.",
+      {
+        text: "Built secrets-detection (DLP) scanning into the enterprise AI-security platform with TruffleHog, reaching 97% recall and 94% F1, and drove a false-positive-reduction effort that cut alert noise for security teams.",
+        track: "both",
+      },
+      {
+        text: "Fixed a classifier field-name inconsistency (path / files / paths) that was causing silent policy misses, closing a coverage gap in DLP and policy enforcement.",
+        track: "both",
+      },
+      {
+        text: "Integrated Authentik (SSO/IdP) into the authentication flow to support enterprise on-prem / customer-cloud (BYOC) deployments, and instrumented services with Prometheus and Grafana for production observability.",
+        track: "both",
+      },
     ],
     technologies: ["TruffleHog", "Go", "Authentik", "Amazon EKS", "Prometheus", "Grafana", "Python"],
   },
@@ -76,11 +102,26 @@ export const EXPERIENCE = [
     role: "Software Engineering Intern",
     duration: "May 2025 - Dec 2025",
     description: [
-      "Migrated the core product from GCP to AWS, resulting in up to 20% cost reduction while maintaining performance and reliability.",
-      "Revamped the billing system to support invoice-based billing along with per-usage policies.",
-      "Enhanced DLP pipelines to improve data security increasing accuracy over 90%.",
-      "Built a low-latency Notification Service to deliver real-time updates efficiently.",
-      "Improved analytics for AI usage governance, enabling better visibility, control, and compliance across AI systems.",
+      {
+        text: "Migrated the core product from GCP to AWS, resulting in up to 20% cost reduction while maintaining performance and reliability.",
+        track: "software",
+      },
+      {
+        text: "Revamped the billing system to support invoice-based billing along with per-usage policies.",
+        track: "software",
+      },
+      {
+        text: "Enhanced DLP pipelines to improve data security increasing accuracy over 90%.",
+        track: "ai-ml",
+      },
+      {
+        text: "Built a low-latency Notification Service to deliver real-time updates efficiently.",
+        track: "software",
+      },
+      {
+        text: "Improved analytics for AI usage governance, enabling better visibility, control, and compliance across AI systems.",
+        track: "ai-ml",
+      },
     ],
     technologies: ["Python", "Django", "AWS", "GCP", "Docker", "Kubernetes"],
   },

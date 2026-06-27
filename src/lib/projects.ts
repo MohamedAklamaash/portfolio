@@ -63,6 +63,8 @@ export const TECH_STACK: { [key: string]: techStack } = {
   EMBEDDINGS: { title: "Embeddings", color: COLOR.BLUE },
   MULTI_AGENT: { title: "Multi-agent", color: COLOR.PINK },
   ALGORITHMS: { title: "Algorithms", color: COLOR.YELLOW },
+  PROMETHEUS: { title: "Prometheus", color: COLOR.ORANGE },
+  DISTRIBUTED: { title: "Distributed Systems", color: COLOR.CYAN },
 };
 
 interface techStack {
@@ -83,6 +85,8 @@ export interface Project {
   shortDescription: string;
   track: ProjectTrack;
   metric?: string;
+  /** Short overlay label for screenshot cards, mirroring the research-card bands. */
+  label?: string;
 }
 export const PROJECTS_DATA: Project[] = [
   {
@@ -149,6 +153,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     title: "Launchpad",
     track: "software",
+    label: "Deploy · AWS",
     shortDescription: "Self-hosted deployment platform that turns a GitHub repo into a running ECS service in your own AWS account—no shared infra, no vendor lock-in.",
     description:
       "A cloud deployment control plane that provisions isolated VPCs, ECS clusters, ALBs, and ECR registries inside the user's own AWS account via Terraform. Handles the full 11-step deployment pipeline: CodeBuild image build, task definition, ALB path-based routing, and ECS service stability—all async via Redis queues and RabbitMQ events.",
@@ -170,8 +175,30 @@ export const PROJECTS_DATA: Project[] = [
     isFeatured: true,
   },
   {
+    title: "relay",
+    track: "software",
+    label: "Job Queue · Go",
+    metric: "at-least-once · visibility-timeout leases · retries + DLQ",
+    shortDescription:
+      "A distributed job scheduler for Go, backed by Redis — at-least-once delivery, crash recovery via visibility-timeout leases, cron scheduling, weighted priority queues, and retries with a dead-letter archive.",
+    description:
+      "A reliable background-job system for Go in the spirit of Sidekiq/asynq: tasks are enqueued to Redis-backed queues and processed by worker pools with configurable concurrency. Visibility-timeout leases re-queue any task a crashed worker never acknowledged, giving at-least-once delivery without a broker. Supports immediate, delayed, and cron-recurring jobs, weighted priority queues with pause/resume, exponential-backoff retries into a dead-letter archive, task deduplication, per-task timeouts and remote cancellation, Prometheus metrics, and a CLI for queue inspection.",
+    techStack: [
+      TECH_STACK.GO,
+      TECH_STACK.REDIS,
+      TECH_STACK.DISTRIBUTED,
+      TECH_STACK.PROMETHEUS,
+      TECH_STACK.DOCKER,
+    ],
+    githubLink: "https://github.com/MohamedAklamaash/relay",
+    deployedLink: undefined,
+    imageSrc: "/projects/relay.svg",
+    isFeatured: true,
+  },
+  {
     title: "codegraph",
     track: "software",
+    label: "Code Graph",
     metric: "AST + call-tracing + embeddings · semantic search across 8 languages",
     shortDescription:
       "Turns any GitHub repository into an interactive code knowledge graph — parses source, traces function calls, builds embeddings, and answers natural-language questions about the architecture.",
@@ -188,7 +215,7 @@ export const PROJECTS_DATA: Project[] = [
     githubLink: "https://github.com/MohamedAklamaash/codegraph",
     deployedLink: undefined,
     imageSrc: "/projects/codegraph.png",
-    isFeatured: false,
+    isFeatured: true,
   },
   {
     title: "syncset-db",
@@ -225,6 +252,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     title: "Voice Opinion",
     track: "software",
+    label: "Realtime · WebRTC",
     shortDescription: "Real-time audio/video rooms with WebRTC peer connections, room visibility controls, in-room chat, and friend-based invite system.",
     description:
       "A full-stack real-time collaboration platform built with React, Node.js, and Socket.io. Supports public, social, and private rooms with WebRTC peer-to-peer audio/video, Google Meet-style pinnable video grid, WhatsApp-style in-room chat with 200-message history, friend requests, and email OTP auth.",
@@ -244,6 +272,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     title: "MANAGE_MONEY",
     track: "software",
+    label: "Finance · OCR",
     shortDescription: "Personal finance dashboard with GPT-4 receipt OCR, budget tracking, and transaction categorisation.",
     description:
       "Architected a financial analytics platform using Next.js and PostgreSQL. Integrated GPT-4 for automated OCR receipt parsing and intelligent budget recommendations, deployed via Docker for consistent environments.",
@@ -261,6 +290,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     title: "SmartScreenshot",
     track: "research",
+    label: "OCR · DLP",
     shortDescription: "OCR pipeline that detects and masks API keys, passwords, and sensitive text in screenshots before they leak.",
     description:
       "OCR-based sensitive content detection system that identifies and masks API keys, passwords, and confidential text in screenshots. Features batch-processing pipelines for high-volume screenshot ingestion, ensuring scalability and reliability for security-critical operations.",

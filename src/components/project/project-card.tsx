@@ -17,7 +17,9 @@ const ProjectCard: FC<ProjectCardProps> = ({
   techStack,
   track,
   metric,
+  label,
 }) => {
+  const bandLabel = label ?? (track === "research" ? "AI / ML" : "Software");
   return (
     <SlideUpWhenVisible>
       <div
@@ -38,18 +40,41 @@ const ProjectCard: FC<ProjectCardProps> = ({
                 alt={title}
               />
             ) : (
-              <Image
-                src={imageSrc}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                alt={title}
-                width={600}
-                height={338}
-                style={{ filter: "grayscale(15%) contrast(1.05)" }}
-              />
+              <>
+                <Image
+                  src={imageSrc}
+                  className="project-shot w-full h-full object-cover group-hover:scale-105"
+                  alt={title}
+                  width={600}
+                  height={338}
+                />
+                {/* Gradient scrim + label band, mirroring the research-card header */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(14,14,14,0.5) 0%, transparent 30%, transparent 55%, rgba(14,14,14,0.82) 100%)",
+                  }}
+                />
+                <span
+                  className="absolute top-4 left-5 font-mono text-[10px] tracking-[0.25em] uppercase pointer-events-none"
+                  style={{ color: "var(--text-2)" }}
+                >
+                  {bandLabel}
+                </span>
+                {metric && (
+                  <p
+                    className="absolute bottom-3 left-5 right-5 font-mono text-[11px] leading-snug pointer-events-none"
+                    style={{ color: "var(--amber)" }}
+                  >
+                    {metric}
+                  </p>
+                )}
+              </>
             )}
             {/* Overlay on hover */}
             <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
               style={{ background: "rgba(212,168,83,0.06)" }}
             />
           </div>
@@ -66,7 +91,7 @@ const ProjectCard: FC<ProjectCardProps> = ({
               className="font-mono text-[10px] tracking-[0.25em] uppercase"
               style={{ color: "var(--text-3)" }}
             >
-              {track === "research" ? "AI / ML" : "Software"}
+              {bandLabel}
             </span>
             {metric && (
               <p

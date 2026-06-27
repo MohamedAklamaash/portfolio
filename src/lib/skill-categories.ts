@@ -1,8 +1,17 @@
 import { TECH_STACK } from "./projects";
 
-export const SKILL_CATEGORIES = [
+type SkillTrack = "software" | "ai-ml" | "both";
+
+interface SkillCategory {
+  title: string;
+  track: SkillTrack;
+  skills: { title: string; color: string }[];
+}
+
+export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     title: "AI / ML Research",
+    track: "ai-ml",
     skills: [
       TECH_STACK.PYTORCH,
       TECH_STACK.TRANSFORMERS,
@@ -15,7 +24,18 @@ export const SKILL_CATEGORIES = [
     ],
   },
   {
+    title: "Applied AI",
+    track: "ai-ml",
+    skills: [
+      TECH_STACK.RAG,
+      TECH_STACK.EMBEDDINGS,
+      TECH_STACK.AI_SAFETY,
+      TECH_STACK.OCR,
+    ],
+  },
+  {
     title: "Languages",
+    track: "both",
     skills: [
       TECH_STACK.TYPESCRIPT,
       TECH_STACK.PYTHON,
@@ -24,6 +44,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Backend & Frameworks",
+    track: "software",
     skills: [
       TECH_STACK.NODEJS,
       TECH_STACK.NESTJS,
@@ -34,6 +55,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Frontend & Mobile",
+    track: "software",
     skills: [
       TECH_STACK.REACT,
       TECH_STACK.NEXTJS,
@@ -41,6 +63,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Databases",
+    track: "both",
     skills: [
       TECH_STACK.POSTGRESQL,
       TECH_STACK.MONGODB,
@@ -49,20 +72,12 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Cloud & DevOps",
+    track: "both",
     skills: [
       TECH_STACK.AWS,
       TECH_STACK.KUBERNETES,
       TECH_STACK.DOCKER,
       TECH_STACK.NGINX,
-    ],
-  },
-  {
-    title: "Applied AI",
-    skills: [
-      TECH_STACK.RAG,
-      TECH_STACK.EMBEDDINGS,
-      TECH_STACK.AI_SAFETY,
-      TECH_STACK.OCR,
     ],
   },
 ];

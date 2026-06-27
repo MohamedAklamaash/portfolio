@@ -1,5 +1,7 @@
 import Navbar from "@/components/navbar";
 import ScrollObserver from "@/lib/scroll-observer";
+import { TerminalProvider } from "@/lib/terminal/terminal-context";
+import TerminalOverlay from "@/components/terminal/terminal-overlay";
 import "@/styles/globals.css";
 import { AppProps } from "next/app";
 import "prism-themes/themes/prism-night-owl.css";
@@ -65,12 +67,15 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" forcedTheme="dark" enableSystem={false} enableColorScheme={true}>
       <ScrollObserver>
-        <main className={`${GeistSans.variable} ${GeistMono.variable} ${syne.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${instrumentSans.variable}`}>
-          <DefaultSeo {...SEO} />
-          <Navbar />
-          <Component {...pageProps} />
-          <Analytics />
-        </main>
+        <TerminalProvider>
+          <main className={`${GeistSans.variable} ${GeistMono.variable} ${syne.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${instrumentSans.variable}`}>
+            <DefaultSeo {...SEO} />
+            <Navbar />
+            <Component {...pageProps} />
+            <TerminalOverlay />
+            <Analytics />
+          </main>
+        </TerminalProvider>
       </ScrollObserver>
     </ThemeProvider>
   );

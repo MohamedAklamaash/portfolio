@@ -1,7 +1,17 @@
 import { allContents } from "contentlayer/generated";
 
 const URL = "https://aklamaash.me";
-const PAGES = ["", "/projects", "/posts"];
+const PAGES = [
+  "/software",
+  "/software/projects",
+  "/software/experience",
+  "/software/skills",
+  "/ai-ml",
+  "/ai-ml/projects",
+  "/ai-ml/experience",
+  "/ai-ml/skills",
+  "/posts",
+];
 
 function generateSiteMap() {
   return `<?xml version="1.0" encoding="UTF-8"?>
