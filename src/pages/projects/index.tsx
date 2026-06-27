@@ -6,7 +6,7 @@ import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 const TRACK_GROUPS: { key: "research" | "software"; label: string }[] = [
-  { key: "research", label: "Research" },
+  { key: "research", label: "AI / ML" },
   { key: "software", label: "Software" },
 ];
 

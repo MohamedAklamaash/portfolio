@@ -65,9 +65,9 @@ export const EXPERIENCE = [
     description: [
       "Built secrets-detection (DLP) scanning into the enterprise AI-security platform with TruffleHog, reaching 97% recall and 94% F1, and drove a false-positive-reduction effort that cut alert noise for security teams.",
       "Fixed a classifier field-name inconsistency (path / files / paths) that was causing silent policy misses, closing a coverage gap in DLP and policy enforcement.",
-      "Shipped on-prem / customer-cloud (BYOC) deployment on Amazon EKS with ArgoCD and Helm (GitOps), integrated Authentik (SSO/IdP) into the auth flow, and instrumented services with Prometheus and Grafana for production observability.",
+      "Integrated Authentik (SSO/IdP) into the authentication flow to support enterprise on-prem / customer-cloud (BYOC) deployments, and instrumented services with Prometheus and Grafana for production observability.",
     ],
-    technologies: ["TruffleHog", "Go", "Amazon EKS", "ArgoCD", "Helm", "Authentik", "Prometheus", "Grafana", "Python"],
+    technologies: ["TruffleHog", "Go", "Authentik", "Amazon EKS", "Prometheus", "Grafana", "Python"],
   },
   {
     company: "Unbound Security",

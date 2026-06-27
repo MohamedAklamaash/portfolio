@@ -33,8 +33,7 @@ const ContactSection = () => {
                 className="max-w-md text-base leading-relaxed"
                 style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
               >
-                Inbox always open—whether it&apos;s a job opportunity, internship, project collaboration, or just a random question.
-                Got something cool in mind, or just bored? Drop a hi, I don&apos;t bite.
+                My inbox is always open—for roles, collaborations, or just an interesting problem worth talking through. If something here caught your eye, say hi.
               </p>
             </div>
 

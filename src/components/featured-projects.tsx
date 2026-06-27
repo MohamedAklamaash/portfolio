@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
 const TRACKS: { key: "research" | "software"; label: string }[] = [
-  { key: "research", label: "Research" },
+  { key: "research", label: "AI / ML" },
   { key: "software", label: "Software" },
 ];
 

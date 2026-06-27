@@ -66,7 +66,7 @@ const ProjectCard: FC<ProjectCardProps> = ({
               className="font-mono text-[10px] tracking-[0.25em] uppercase"
               style={{ color: "var(--text-3)" }}
             >
-              {track === "research" ? "Research" : "Software"}
+              {track === "research" ? "AI / ML" : "Software"}
             </span>
             {metric && (
               <p

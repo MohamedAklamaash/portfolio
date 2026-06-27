@@ -141,13 +141,14 @@ const Intro = () => {
             className="max-w-md text-base leading-[1.65] mb-8"
             style={{ color: "var(--text-2)", fontFamily: "var(--font-body)" }}
           >
-            I build and study ML systems — training language models from scratch,
-            benchmarking LLM adversarial robustness, and running the cloud
-            infrastructure that ships them. Currently building AI security at{" "}
+            I build ML systems and the backends that run them — I&apos;ve trained
+            small language models from scratch, built a benchmark for LLM adversarial
+            robustness, and spend most of my time across backend and cloud
+            infrastructure. Currently working on AI security at{" "}
             <a href="https://www.unboundsecurity.ai" target="_blank" rel="noopener noreferrer" className="link-amber">
               Unbound Security (YC S24)
             </a>
-            ; pursuing an integrated M.Sc. in Data Science at{" "}
+            , and pursuing an integrated M.Sc. in Data Science at{" "}
             <a href="https://www.psgtech.edu" target="_blank" rel="noopener noreferrer" className="link-amber">
               PSG College of Technology
             </a>
