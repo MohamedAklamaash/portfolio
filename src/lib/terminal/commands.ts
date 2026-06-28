@@ -15,8 +15,10 @@ const EXTERNAL: Record<string, string> = {
   github: SOCIALS.github,
   linkedin: SOCIALS.linkedin,
   email: SOCIALS.email,
-  resume: "/resume.pdf",
 };
+
+const externalFor = (target: string, t: TrackId): string | undefined =>
+  target === "resume" ? TRACKS[t].resume : EXTERNAL[target];
 
 const SECTIONS = ["about", "projects", "experience", "skills", "posts"];
 
@@ -94,9 +96,10 @@ export function buildCommands(): Record<string, TerminalCommand> {
           ctx.print("usage: open <github|linkedin|resume|email|section>", "error");
           return;
         }
-        if (EXTERNAL[target]) {
+        const url = externalFor(target, ctx.track);
+        if (url) {
           ctx.print(`opening ${target}…`, "accent");
-          ctx.openExternal(EXTERNAL[target]);
+          ctx.openExternal(url);
           return;
         }
         goSection(target, ctx);

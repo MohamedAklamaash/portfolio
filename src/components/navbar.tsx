@@ -26,7 +26,7 @@ const navItems: {
   { name: "Skills", section: "skills", href: (t) => `/${t}/skills`, icon: <CpuIcon size={15} /> },
   { name: "Projects", section: "projects", href: (t) => `/${t}/projects`, icon: <FolderClosedIcon size={15} /> },
   { name: "Posts", section: "posts", href: () => `/posts`, icon: <TextIcon size={15} /> },
-  { name: "Resume", section: null, href: () => `/resume.pdf`, icon: <FileUserIcon size={15} /> },
+  { name: "Resume", section: null, href: (t) => TRACKS[t].resume, icon: <FileUserIcon size={15} />, file: true },
 ];
 
 const Navbar = () => {

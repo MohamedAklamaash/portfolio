@@ -37,6 +37,8 @@ interface TrackConfig {
   aboutBlocks: ReactNode[];
   /** whoami key/value rows for the terminal. */
   terminalIdentity: [string, string][];
+  /** Track-specific resume PDF in /public. */
+  resume: string;
   seo: { title: string; description: string };
 }
 
@@ -103,6 +105,7 @@ export const TRACKS: Record<TrackId, TrackConfig> = {
       ["stack", "go · python · aws · k8s"],
       ["status", "open to roles"],
     ],
+    resume: "/Aklamaash_Resume_SDE.pdf",
     seo: {
       title: "Software Engineer",
       description:
@@ -170,6 +173,7 @@ export const TRACKS: Record<TrackId, TrackConfig> = {
       ["stack", "pytorch · python · cuda"],
       ["status", "open to roles"],
     ],
+    resume: "/Aklamaash_Resume_AI.pdf",
     seo: {
       title: "AI / ML Engineer",
       description:

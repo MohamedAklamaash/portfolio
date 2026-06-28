@@ -149,7 +149,7 @@ const Intro = ({ track }: { track: TrackId }) => {
               </motion.button>
             </Link>
 
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href={cfg.resume} target="_blank" rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.03, borderColor: "var(--amber-dim)", color: "var(--amber)" }}
                 whileTap={{ scale: 0.97 }}
