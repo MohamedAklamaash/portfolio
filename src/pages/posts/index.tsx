@@ -1,51 +1,57 @@
-import PostCard from "@/components/post-card";
-import SlideUpWhenVisible from "@/components/slide-up-when-visible";
-import { allContents } from "contentlayer/generated";
-import { NextSeo } from "next-seo";
+import Seo from "@/components/seo";
+import { formatDate } from "@/lib/format";
+import { getPostList, type PostMeta } from "@/lib/posts";
+import { breadcrumbSchema } from "@/lib/structured-data";
+import type { GetStaticProps } from "next";
+import Link from "next/link";
 
-const Posts = () => {
+export default function Posts({ posts }: { posts: PostMeta[] }) {
   return (
     <>
-      <NextSeo title="Posts | Mohamed Aklamaash" description="A collection of my blog posts." />
-      <div
-        className="min-h-screen pt-12 pb-28 px-6 lg:px-16"
-        style={{ background: "var(--bg)" }}
-      >
-        <SlideUpWhenVisible>
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: "var(--text-3)" }}>
-                Writing
-              </span>
-              <span className="h-px w-12" style={{ background: "var(--border)" }} />
-            </div>
-            <h1
-              className="font-display leading-none mb-4"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--text)" }}
-            >
-              Posts
-            </h1>
-            <p className="font-mono text-sm" style={{ color: "var(--text-3)" }}>
-              Thoughts on engineering, systems, and building things.
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto grid gap-3 grid-cols-1 sm:grid-cols-2">
-            {allContents
-              ?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-              .map((post) => (
-                <PostCard
-                  slug={post.slug}
-                  key={post.title}
-                  title={post.title}
-                  description={post.description}
-                />
-              ))}
-          </div>
-        </SlideUpWhenVisible>
+      <Seo
+        title="Writing"
+        description="Notes by Mohamed Aklamaash on why and how he built his projects: deployment platforms, Postgres replication, LLM safety benchmarks and more."
+        path="/posts"
+        jsonLd={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Writing", path: "/posts" },
+          ]),
+        ]}
+      />
+      <div className="mx-auto max-w-prose px-5 pt-14 sm:px-0 sm:pt-20">
+        <h1 className="text-[32px] font-semibold tracking-[-0.025em] text-fg sm:text-[40px]">
+          Writing
+        </h1>
+        <p className="mt-3 text-[17px] leading-7 text-body">
+          Longer notes on why I built some of my projects and what I ran into
+          along the way.
+        </p>
+        <ul className="mt-10 divide-y divide-line border-y border-line">
+          {posts.map((p) => (
+            <li key={p.slug}>
+              <Link href={`/posts/${p.slug}`} className="group block py-5">
+                <time
+                  dateTime={p.date}
+                  className="font-mono text-[12px] text-subtle"
+                >
+                  {formatDate(p.date)}
+                </time>
+                <h2 className="mt-1.5 text-[18px] font-medium tracking-[-0.01em] text-fg group-hover:text-accent">
+                  {p.title}
+                </h2>
+                <p className="mt-1 text-[15px] leading-6 text-muted">
+                  {p.description}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
-};
+}
 
-export default Posts;
+export const getStaticProps: GetStaticProps = async () => ({
+  props: { posts: getPostList() },
+});

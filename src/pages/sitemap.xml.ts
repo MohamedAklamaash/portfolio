@@ -1,54 +1,38 @@
+import { caseStudies } from "@/content/projects";
+import { absoluteUrl } from "@/content/site";
 import { allContents } from "contentlayer/generated";
+import type { GetServerSideProps } from "next";
 
-const URL = "https://aklamaash.me";
-const PAGES = [
-  "/software",
-  "/software/projects",
-  "/software/experience",
-  "/software/skills",
-  "/ai-ml",
-  "/ai-ml/projects",
-  "/ai-ml/experience",
-  "/ai-ml/skills",
-  "/posts",
-];
+/** Only canonical, indexable URLs. Redirecting routes are left out on purpose. */
+const buildSitemap = () => {
+  const urls: { loc: string; lastmod?: string }[] = [
+    { loc: "/" },
+    { loc: "/software" },
+    { loc: "/ai" },
+    ...caseStudies().map((p) => ({ loc: `/projects/${p.slug}` })),
+    { loc: "/posts" },
+    ...allContents.map((p) => ({ loc: `/posts/${p.slug}`, lastmod: p.date })),
+  ];
+  const body = urls
+    .map(
+      (u) =>
+        `  <url>\n    <loc>${absoluteUrl(u.loc)}</loc>${u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ""}\n  </url>`,
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+};
 
-function generateSiteMap() {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     ${PAGES.map((page) => {
-       return `
-        <url>
-            <loc>${URL}${page}</loc>
-        </url>
-      `;
-     }).join("")}
-     ${allContents
-       .map((snippet) => {
-         return `
-       <url>
-           <loc>${`${URL}/posts/${snippet.slug}`}</loc>
-       </url>
-     `;
-       })
-       .join("")}
-   </urlset>
- `;
-}
-
-function SiteMap() {
-  // getServerSideProps will do the heavy lifting
-}
-
-export async function getServerSideProps({ res }: { res: any }) {
-  const sitemap = generateSiteMap();
-  res.setHeader("Content-Type", "text/xml");
-  res.write(sitemap);
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  res.setHeader("Content-Type", "application/xml; charset=utf-8");
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=86400, stale-while-revalidate=604800",
+  );
+  res.write(buildSitemap());
   res.end();
+  return { props: {} };
+};
 
-  return {
-    props: {},
-  };
+export default function Sitemap() {
+  return null;
 }
-
-export default SiteMap;

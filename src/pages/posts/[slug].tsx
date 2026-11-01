@@ -1,57 +1,105 @@
-import Mdx from "@/components/mdx";
-import { allContents, Content } from "contentlayer/generated";
-import {
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
-  NextPage,
-} from "next";
-import { NextSeo } from "next-seo";
+import { ArrowLeft } from "@/components/icons";
+import Seo from "@/components/seo";
+import { formatDate } from "@/lib/format";
+import { articleSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { allContents } from "contentlayer/generated";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import { useMDXComponent } from "next-contentlayer/hooks";
 import Link from "next/link";
-import { AiOutlineSwapLeft } from "react-icons/ai";
 
-const CodeSnippet: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  snippet,
-}) => {
-  return (
-    <>
-      <NextSeo title={snippet?.title} description={snippet?.description} />
-      <div className="max-w-3xl mx-auto px-6 sm:px-8 mb-24">
-        <h1 className="text-4xl font-semibold mt-12 md:mt-20">{snippet?.title}</h1>
-        <p className="text-gray-400 mt-1">{snippet?.description}</p>
-
-        <hr className="border-gray-700 my-3" />
-        <Mdx code={snippet?.body?.code} />
-        <div className="border-gray-700 border-[0.2px]" />
-        <Link href="/posts" className="flex justify-center mt-12 mb-16">
-          <div className="flex gap-2 hover:bg-gray-800 px-4 py-2 rounded-md hover:cursor-pointer">
-            <AiOutlineSwapLeft className="w-5 h-5" />
-            <p className="text-sm">See all posts</p>
-          </div>
-        </Link>
-      </div>
-    </>
-  );
-};
-export default CodeSnippet;
-
-export async function getStaticPaths() {
-  const paths = allContents.map((snippet) => ({
-    params: { slug: snippet.slug },
-  }));
-
-  return {
-    paths,
-    fallback: false,
+interface Props {
+  post: {
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    code: string;
   };
 }
 
-export async function getStaticProps({
-  params,
-}: GetStaticPropsContext): Promise<GetStaticPropsResult<{ snippet: Content }>> {
-  const snippet = allContents.find((snippet) => snippet.slug === params?.slug);
-
-  if (!snippet) return { notFound: true };
-
-  return { props: { snippet } };
+export default function Post({ post }: Props) {
+  const MDX = useMDXComponent(post.code);
+  const path = `/posts/${post.slug}`;
+  return (
+    <>
+      <Seo
+        title={post.title}
+        description={post.description}
+        path={path}
+        type="article"
+        publishedTime={post.date}
+        jsonLd={[
+          articleSchema({
+            title: post.title,
+            description: post.description,
+            path,
+            date: post.date,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Writing", path: "/posts" },
+            { name: post.title, path },
+          ]),
+        ]}
+      />
+      <article className="mx-auto max-w-prose px-5 pt-14 sm:px-0 sm:pt-20">
+        <nav aria-label="Breadcrumb">
+          <Link
+            href="/posts"
+            className="inline-flex items-center gap-1.5 text-[14px] text-muted hover:text-fg"
+          >
+            <ArrowLeft />
+            Writing
+          </Link>
+        </nav>
+        <header className="mt-8 border-b border-line pb-8">
+          <time
+            dateTime={post.date}
+            className="font-mono text-[12px] text-subtle"
+          >
+            {formatDate(post.date)}
+          </time>
+          <h1 className="mt-3 text-[30px] font-semibold leading-[1.2] tracking-[-0.025em] text-fg sm:text-[38px]">
+            {post.title}
+          </h1>
+          <p className="mt-3 text-[17px] leading-7 text-muted">
+            {post.description}
+          </p>
+        </header>
+        <div className="prose-post mt-8">
+          <MDX components={{ a: (p: any) => <a {...p} /> }} />
+        </div>
+        <footer className="mt-14 border-t border-line pt-6">
+          <Link
+            href="/posts"
+            className="inline-flex items-center gap-1.5 text-[14px] text-muted hover:text-fg"
+          >
+            <ArrowLeft />
+            All writing
+          </Link>
+        </footer>
+      </article>
+    </>
+  );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: allContents.map((p) => ({ params: { slug: p.slug } })),
+  fallback: false,
+});
+
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const doc = allContents.find((p) => p.slug === params?.slug);
+  if (!doc) return { notFound: true };
+  return {
+    props: {
+      post: {
+        slug: doc.slug,
+        title: doc.title,
+        description: doc.description,
+        date: doc.date,
+        code: doc.body.code,
+      },
+    },
+  };
+};
