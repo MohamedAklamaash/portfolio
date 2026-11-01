@@ -157,3 +157,31 @@ Each profile page holds intro, selected projects, experience, technical areas, e
 - `robots.txt` with a sitemap reference, and a sitemap that lists only real canonical URLs.
 - Distinct intros, project sets and technical areas on `/software` and `/ai`, so they are not near-duplicates. Experience is shared but framed by a different lead line on each.
 - Purpose-made 1200×630 OG images for home, software and AI.
+
+## 8. Results after the redesign
+
+Same method as the baseline: Lighthouse 12.8, production build served locally by `next start`, default mobile emulation (Moto G Power, slow 4G, 4× CPU throttle) and the desktop preset. Built with `NEXT_PUBLIC_DISABLE_ANALYTICS=1` because the Vercel Analytics script only exists on Vercel and returns 404 locally. Real-world numbers on Vercel's CDN should be similar or better, since TTFB there is lower than the simulated 450 ms.
+
+| Page | Mobile perf | A11y | Best practices | SEO | Mobile LCP | Mobile TBT | CLS | Desktop perf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 100 | 100 | 100 | 100 | 1.9 s | 60 ms | 0 | 100 |
+| `/software` | 99 | 100 | 100 | 100 | 2.0 s | 60 ms | 0 | 100 |
+| `/ai` | 99 | 100 | 100 | 100 | 2.0 s | 100 ms | 0 | 100 |
+| `/projects/launchpad` | 100 | 100 | 100 | 100 | 1.9 s | 30 ms | 0 | 100 |
+| `/projects/redharness` | 100 | 100 | 100 | 100 | 1.9 s | 50 ms | 0 | 100 |
+| `/posts` | 100 | 100 | 100 | 100 | 1.7 s | 50 ms | 0 | 100 |
+| `/posts/why-i-built-launchpad` | 99 | 100 | 100 | 100 | 1.7 s | 130 ms | 0 | 100 |
+
+**Before and after (mobile)**
+
+| | Before (`/software`) | After (`/software`) |
+|---|---:|---:|
+| Performance | 59 | 99 |
+| Accessibility | 87 | 100 |
+| LCP | 6.0 s | 2.0 s |
+| TBT | 820 ms | 60 ms |
+| Transfer size | 743 KiB | 187 KiB |
+| First-load JS (build output) | 174 kB | 111 kB |
+| Fonts | 7 families, ~330 KiB | 1 variable file, 23 KiB |
+
+**What's left in LCP.** The LCP element on every page is a paragraph of body text. Its time is almost all render delay, waiting for Geist to swap in (`font-display: swap`). Switching to `optional` would bring LCP close to FCP (0.8 s), but first-time visitors on slow connections would see the fallback font for the whole visit. I kept `swap` and cut the font to a 23 KiB Latin subset instead. The remaining JS is mostly React and the Next.js runtime (~78 kB of the 85 kB shared).

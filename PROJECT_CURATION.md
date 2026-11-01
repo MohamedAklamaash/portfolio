@@ -2,7 +2,7 @@
 
 Every project shown on the site before the redesign, what I checked for each and whether it stays.
 
-**How the projects were reviewed.** All 11 linked repositories were cloned (shallow, default branch) on 2026-11-01. For each one I read the README and docs, the directory layout, the core modules and the test suite, and counted source lines (Python/Go/TS/JS, excluding lockfiles). Nothing was run against live services. Claims on the site are limited to what the code or the repository's own documented results support.
+**How the projects were reviewed.** All 11 linked repositories were cloned (default branch, full history) on 2026-11-01. For each one I read the README and docs, the directory layout, the core modules and the test suite, and counted source lines (Python/Go/TS/JS, excluding lockfiles). I also checked commit authorship. Every project except SmartScreenshot is solo: all commits are yours. Nothing was run against live services. Claims on the site are limited to what the code or the repository's own documented results support.
 
 **Scoring** (1 to 5): depth = technical depth and engineering complexity, orig = originality, use = practical usefulness, impl = implementation quality (tests, docs, structure), fit = relevance to the target roles, evid = evidence of real work.
 
@@ -21,7 +21,7 @@ Every project shown on the site before the redesign, what I checked for each and
 | 8 | patternix | AI/ML | 2 | 2 | 2 | 2 | 3 | 3 | **Keep** (compact, paper implementation) |
 | 9 | Voice Opinion | Software | 3 | 2 | 2 | 2 | 2 | 3 | Remove from presentation |
 | 10 | MANAGE_MONEY | Software | 2 | 2 | 3 | 2 | 1 | 3 | Remove from presentation |
-| 11 | SmartScreenshot | AI/ML | 2 | 3 | 3 | 2 | 2 | 1 | Remove from presentation |
+| 11 | SmartScreenshot | AI/ML | 2 | 3 | 3 | 2 | 2 | 3 | Remove from presentation |
 
 **Final selection**
 
@@ -120,5 +120,5 @@ No project appears on both profiles. codegraph is on the SDE resume, but its mos
 ### SmartScreenshot: removed
 - **Category:** AI/ML
 - **Link:** https://github.com/luqmaan-k/SmartScreenshot (someone else's repository)
-- **Evidence reviewed:** about 900 lines of Python. A GTK screenshot tool that blurs text detected by Tesseract OCR. The repo belongs to `luqmaan-k`. I could not work out from a shallow clone which parts were yours.
-- **Reason:** It's a small collaborative tool with standard OCR and no model work, and your contribution can't be confirmed. If you contributed a lot, it could come back as a compact entry. See `TODO.md`.
+- **Evidence reviewed:** about 900 lines of Python. A GTK screenshot tool that blurs text detected by Tesseract OCR. The repo belongs to `luqmaan-k`. You wrote 11 of its 20 commits (Mar 2025 to Feb 2026), so it was a genuine two-person project.
+- **Reason:** It's a small desktop tool that uses off-the-shelf Tesseract OCR and has no model work. It is weaker than the five AI projects kept. Its subject (catching secrets before they leak) overlaps with the DLP work at Unbound, which already appears under Experience.
