@@ -36,12 +36,12 @@ export const HOME = {
   seo: {
     title: "Mohamed Aklamaash: Software Engineer, Backend and AI",
     description:
-      "Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and information retrieval. Final-year M.Sc. Data Science at PSG Tech.",
+      "Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and AI. Final-year M.Sc. Data Science at PSG Tech.",
   },
   greeting: "Hey, I'm Aklamaash.",
   intro: [
-    "I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and information retrieval alongside.",
-    "The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a retrieval step keeps returning the wrong context. Getting an application to run reliably in the cloud without the bill getting silly.",
+    "I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and AI alongside.",
+    "The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a model's results look better than they really are. Getting an application to run reliably in the cloud without the bill getting silly.",
     "I'm in the final year of an integrated M.Sc. in Data Science at PSG College of Technology, and I've spent about a year as an intern at Unbound Security. Here's a bit more about what I've been working on.",
   ],
   paths: {
@@ -54,7 +54,7 @@ export const HOME = {
     ai: {
       title: "AI and Machine Learning",
       description:
-        "Machine learning, information retrieval, LLM evaluation and research-style projects.",
+        "Machine learning, LLM evaluation, training models and research-style projects.",
       examples: "redharness, nanocoder-math, codegraph",
     },
   } satisfies Record<
@@ -166,28 +166,27 @@ export const PROFILES: Record<ProfileId, Profile> = {
       },
     ],
     crossLink:
-      "I also work on machine learning, LLM evaluation and retrieval. That work is on a separate page.",
+      "I also work on machine learning and AI, mostly evaluating language models and training small ones. That work is on a separate page.",
   },
 
   ai: {
     id: "ai",
     seo: {
-      title: "AI and Machine Learning: Evaluation and Retrieval",
+      title: "AI and Machine Learning: LLM Evaluation and Training",
       description:
-        "AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, retrieval over code, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.",
+        "AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, multi-agent reinforcement learning, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.",
     },
     eyebrow: "AI and Machine Learning",
-    heading: "Evaluation, retrieval and models I've trained myself.",
+    heading: "Testing models properly and training my own.",
     intro: [
-      "I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and is the model even looking at the right information? That's why most of my AI work ends up being about evaluation and retrieval.",
+      "I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and what has the model actually learnt? That's why most of my AI work ends up being about evaluating models and training them myself.",
       "My favourite project here is redharness, a benchmark for how easily language models can be tricked into misbehaving. While building it I found the same attack scored 100% with one grader and 15% with another, which says a lot about how AI safety numbers get reported. I've also trained a small GPT from scratch on my laptop to understand what actually makes training work. At Unbound Security I built secrets detection for an AI security product and tuned it to catch 97% of leaked keys and passwords in testing.",
     ],
-    lookingFor:
-      "Open to AI engineer, ML engineer and applied AI roles, especially ones that involve evaluation or retrieval.",
+    lookingFor: "Open to AI engineer, ML engineer and applied AI roles.",
     focus: [
       "LLM evaluation and safety",
-      "Information retrieval and RAG",
       "Training and ablating small models",
+      "Reinforcement learning",
       "Experiment design",
     ],
     projectsHeading: "Selected projects",
@@ -219,16 +218,6 @@ export const PROFILES: Record<ProfileId, Profile> = {
         usedIn: "redharness; DLP at Unbound",
       },
       {
-        title: "Retrieval",
-        items: [
-          "Dense embeddings",
-          "pgvector",
-          "Graph-expanded retrieval",
-          "Grounded generation",
-        ],
-        usedIn: "codegraph",
-      },
-      {
         title: "Reinforcement learning",
         items: [
           "PPO (Stable-Baselines3)",
@@ -249,8 +238,13 @@ export const PROFILES: Record<ProfileId, Profile> = {
         usedIn: "RAMPART, patternix, coursework",
       },
       {
-        title: "LLM APIs and tooling",
-        items: ["OpenAI", "Anthropic", "Gemini", "FastAPI", "Streamlit"],
+        title: "LLM applications",
+        items: [
+          "OpenAI, Anthropic and Gemini APIs",
+          "Embeddings with pgvector",
+          "FastAPI",
+          "Streamlit",
+        ],
         usedIn: "redharness, codegraph, RAMPART",
       },
     ],

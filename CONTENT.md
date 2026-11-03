@@ -16,20 +16,20 @@ Generated from `src/content/*` by `pnpm content:md`. Edit the TypeScript files, 
 
 **Title:** Mohamed Aklamaash: Software Engineer, Backend and AI
 
-**Description:** Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and information retrieval. Final-year M.Sc. Data Science at PSG Tech.
+**Description:** Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and AI. Final-year M.Sc. Data Science at PSG Tech.
 
 ### Hey, I'm Aklamaash.
 
-I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and information retrieval alongside.
+I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and AI alongside.
 
-The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a retrieval step keeps returning the wrong context. Getting an application to run reliably in the cloud without the bill getting silly.
+The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a model's results look better than they really are. Getting an application to run reliably in the cloud without the bill getting silly.
 
 I'm in the final year of an integrated M.Sc. in Data Science at PSG College of Technology, and I've spent about a year as an intern at Unbound Security. Here's a bit more about what I've been working on.
 
 **Paths**
 
 - **Software Engineering** (/software): Backend engineering, distributed systems, cloud infrastructure and full-stack work. Including Tale Analytics, Launchpad, relay.
-- **AI and Machine Learning** (/ai): Machine learning, information retrieval, LLM evaluation and research-style projects. Including redharness, nanocoder-math, codegraph.
+- **AI and Machine Learning** (/ai): Machine learning, LLM evaluation, training models and research-style projects. Including redharness, nanocoder-math, codegraph.
 
 **Right now**
 
@@ -75,23 +75,23 @@ Open to software engineer, backend, platform and infrastructure roles.
 - Data and messaging: PostgreSQL, MongoDB, Redis, RabbitMQ, Kafka (used in: Launchpad, relay, syncset-db)
 - Observability: Prometheus, Grafana, CloudWatch (used in: Monitoring for BYOC at Unbound; relay metrics; Launchpad logs)
 
-**Cross-link:** I also work on machine learning, LLM evaluation and retrieval. That work is on a separate page.
+**Cross-link:** I also work on machine learning and AI, mostly evaluating language models and training small ones. That work is on a separate page.
 
 ## AI and Machine Learning `/ai`
 
-**Title:** AI and Machine Learning: Evaluation and Retrieval
+**Title:** AI and Machine Learning: LLM Evaluation and Training
 
-**Description:** AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, retrieval over code, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.
+**Description:** AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, multi-agent reinforcement learning, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.
 
-### Evaluation, retrieval and models I've trained myself.
+### Testing models properly and training my own.
 
-I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and is the model even looking at the right information? That's why most of my AI work ends up being about evaluation and retrieval.
+I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and what has the model actually learnt? That's why most of my AI work ends up being about evaluating models and training them myself.
 
 My favourite project here is redharness, a benchmark for how easily language models can be tricked into misbehaving. While building it I found the same attack scored 100% with one grader and 15% with another, which says a lot about how AI safety numbers get reported. I've also trained a small GPT from scratch on my laptop to understand what actually makes training work. At Unbound Security I built secrets detection for an AI security product and tuned it to catch 97% of leaked keys and passwords in testing.
 
-Open to AI engineer, ML engineer and applied AI roles, especially ones that involve evaluation or retrieval.
+Open to AI engineer, ML engineer and applied AI roles.
 
-**Focus:** LLM evaluation and safety · Information retrieval and RAG · Training and ablating small models · Experiment design
+**Focus:** LLM evaluation and safety · Training and ablating small models · Reinforcement learning · Experiment design
 
 **Selected projects:** Each project lists the question, what I measured and where it falls short. Numbers come from the repositories.
 
@@ -103,10 +103,9 @@ Open to AI engineer, ML engineer and applied AI roles, especially ones that invo
 
 - Deep learning: PyTorch, Decoder-only Transformers, BPE tokenisation, AdamW and Muon, Mixed precision (used in: nanocoder-math)
 - LLM evaluation and safety: Benchmark design, LLM-as-judge, Judge agreement (Cohen's κ), Jailbreak and prompt-injection testing, DLP and secrets detection (used in: redharness; DLP at Unbound)
-- Retrieval: Dense embeddings, pgvector, Graph-expanded retrieval, Grounded generation (used in: codegraph)
 - Reinforcement learning: PPO (Stable-Baselines3), GRPO with verifiable rewards, Gymnasium environments (used in: RAMPART, nanocoder-math)
 - Data science: NumPy, pandas, scikit-learn, Walk-forward backtesting, Streaming algorithms (used in: RAMPART, patternix, coursework)
-- LLM APIs and tooling: OpenAI, Anthropic, Gemini, FastAPI, Streamlit (used in: redharness, codegraph, RAMPART)
+- LLM applications: OpenAI, Anthropic and Gemini APIs, Embeddings with pgvector, FastAPI, Streamlit (used in: redharness, codegraph, RAMPART)
 
 **Cross-link:** Most of my professional work has been backend and infrastructure. That's on the software engineering page.
 
@@ -114,22 +113,22 @@ Open to AI engineer, ML engineer and applied AI roles, especially ones that invo
 
 ### Unbound Security (YC S24), Remote / Bengaluru
 
-Unbound builds a security platform that helps companies control how their employees and AI agents use AI tools. I interned there twice and worked across the backend, the cloud setup and the detection pipelines.
+Unbound builds a security platform that helps companies control how their employees and AI agents use AI tools. I interned there twice and worked on the backend, the cloud setup and the systems that detect sensitive data.
 
 **Software Engineering Intern (Summer)**, May 2026 – Jun 2026
 
-- Added secrets and DLP scanning to the platform using TruffleHog and tuned it to 97% recall and 94% F1. I then went after false positives, which security teams had been complaining about, and cut the alert noise down.
-- Tracked down a field-name mismatch in a classifier (path vs files vs paths) that was silently skipping policy checks, and closed the gap.
-- Shipped bring-your-own-cloud (BYOC) deployment so enterprise customers can run the product inside their own cloud: Amazon EKS with Helm and ArgoCD for GitOps, Authentik for SSO, plus Prometheus and Grafana for monitoring.
+- Added detection for passwords, API keys and other secrets to the platform using TruffleHog. In testing it caught 97% of real secrets (94% F1). I then cut down the false alarms that security teams had been complaining about.
+- Found and fixed a bug where some security policies were quietly not being applied, because different parts of the system used different names for the same field.
+- Made it possible for large customers to run the whole product inside their own cloud account. This used Kubernetes on AWS (EKS) with Helm and ArgoCD for deployments, Authentik for single sign-on. Prometheus and Grafana handle the monitoring.
 
 Stack: Go, Python, TruffleHog, Amazon EKS, Helm, ArgoCD, Authentik, Prometheus, Grafana
 
 **Software Engineering Intern**, May 2025 – Dec 2025
 
-- Moved the core product from GCP to AWS across its microservices. Infrastructure cost came down by up to 20% without hurting reliability or performance.
-- Rebuilt the billing system to support invoice-based and usage-metered pricing, and owned it from design through to production.
-- Improved the DLP detection pipelines to over 90% classification accuracy.
-- Built a low-latency notification service for real-time updates. I also built analytics for AI usage governance so organisations could see how every AI agent was being used.
+- Moved the company's product, with all its services, from Google Cloud to AWS. This cut infrastructure costs by up to 20% without making anything slower or less reliable.
+- Rebuilt the billing system so customers can be charged by invoice or by how much they use, and looked after it from design to launch.
+- Improved the system that spots sensitive data, taking its accuracy above 90%.
+- Built a fast notification service for real-time updates, and dashboards that show companies how their AI tools and agents are being used.
 
 Stack: Python, Django, AWS, GCP, Docker, Kubernetes
 
@@ -354,25 +353,25 @@ _Controlled comparisons_
 - GSM8K and HumanEval stay near zero at this scale. The arithmetic results come from a matched synthetic test set.
 - There is no automated test suite yet. Reproducibility comes from the scripted commands in the README.
 
-### codegraph (AI/ML) · Retrieval over source code · Working prototype · Apr 2026 – Jun 2026
+### codegraph (AI/ML) · AI codebase explorer · Working prototype · Apr 2026 – Jun 2026
 
 **Summary:** Give it a GitHub repository and it builds a graph of the codebase, where every function is a node and every call is an edge. You can explore the graph or ask questions like "where is billing handled?" and get answers grounded in the actual code.
 
-**What was interesting:** Plain vector search finds functions that look like the question but misses the code they depend on. codegraph takes the top matches from pgvector and then follows call edges one hop out before building the context, so answers include the functions that actually do the work.
+**What was interesting:** The function whose name matches your question is often just a thin wrapper, and the real logic lives in what it calls. So codegraph finds the closest matching functions with vector search and then follows the call graph one step further before answering. That way the answer includes the code that actually does the work.
 
-**My part:** Solo project. I built the parser, the graph and embedding pipeline, the retrieval and chat API and the React front end.
+**My part:** Solo project. I built the parser, the graph and embedding pipeline, the chat API and the React front end.
 
 **Stack:** Python, Django, PostgreSQL, pgvector, Gemini embeddings, SSE, React, Docker
 
 **Links:** [Source](https://github.com/MohamedAklamaash/codegraph)
 
-#### Case study: codegraph: retrieval over source code
+#### Case study: codegraph: ask questions about a codebase
 
-_How codegraph parses a repository into a function call graph, embeds each function into pgvector and expands vector search results along call edges to answer questions about the code._
+_How codegraph parses a repository into a function call graph, embeds each function into pgvector and follows call edges from the closest matches to answer questions about the code._
 
 **Problem**
 
-Reading an unfamiliar codebase usually means a lot of grepping. Asking an LLM helps only if it gets the right code as context, and a codebase is a bad fit for chunk-and-embed retrieval: the function whose name matches your question is often a thin wrapper, and the logic lives in what it calls.
+Reading an unfamiliar codebase usually means a lot of grepping. Asking an LLM helps only if you give it the right code, and that's harder than it sounds: the function whose name matches your question is often a thin wrapper, and the logic lives in what it calls.
 
 **Pipeline**
 
@@ -382,19 +381,19 @@ Python is parsed with the standard library's ast module. The other languages (Ja
 - 2. Parse: Functions and the calls inside them, across 9 languages
 - 3. Store: Function nodes and call edges in PostgreSQL
 - 4. Embed: Each function embedded with Gemini into pgvector
-- 5. Retrieve: Top 8 by vector distance, then one hop along call edges
+- 5. Find: 8 closest functions by vector search, plus the functions they call
 - 6. Answer: Grounded response streamed over SSE
 
-**Retrieval**
+**Finding the right code**
 
 - Every query is scoped to one repository, including the edge expansion, so a stray edge can't pull in another repository's code.
 - Embedding calls are batched, run in parallel and retried on transient API errors.
 
-_Code excerpt from `backend/apps/chat/views.py`: Seed with vector search, then expand along the call graph_
+_Code excerpt from `backend/apps/chat/views.py`: Start from vector search, then follow the call graph one step_
 
 **What's missing**
 
-- There is no retrieval evaluation yet. I haven't measured recall against a labelled set of questions, so I can't say how much the graph expansion helps compared with vector search alone. That's the next thing I want to do.
+- I haven't measured answer quality yet against a set of questions with known answers, so I can't say how much following the call graph helps compared with vector search alone.
 - Regex-based parsing misses some calls in non-Python languages. Moving to tree-sitter would fix most of that.
 
 ### RAMPART (AI/ML) · Multi-agent RL research · Research, simulation only · Mar 2026 – Jun 2026

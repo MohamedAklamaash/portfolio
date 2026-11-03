@@ -501,14 +501,14 @@ end`,
     slug: "codegraph",
     name: "codegraph",
     profile: "ai",
-    kind: "Retrieval over source code",
+    kind: "AI codebase explorer",
     status: { label: "Working prototype", tone: "complete" },
     period: "Apr 2026 – Jun 2026",
     summary:
       'Give it a GitHub repository and it builds a graph of the codebase, where every function is a node and every call is an edge. You can explore the graph or ask questions like "where is billing handled?" and get answers grounded in the actual code.',
     interesting:
-      "Plain vector search finds functions that look like the question but misses the code they depend on. codegraph takes the top matches from pgvector and then follows call edges one hop out before building the context, so answers include the functions that actually do the work.",
-    role: "Solo project. I built the parser, the graph and embedding pipeline, the retrieval and chat API and the React front end.",
+      "The function whose name matches your question is often just a thin wrapper, and the real logic lives in what it calls. So codegraph finds the closest matching functions with vector search and then follows the call graph one step further before answering. That way the answer includes the code that actually does the work.",
+    role: "Solo project. I built the parser, the graph and embedding pipeline, the chat API and the React front end.",
     stack: [
       "Python",
       "Django",
@@ -527,14 +527,14 @@ end`,
       height: 1184,
     },
     caseStudy: {
-      title: "codegraph: retrieval over source code",
+      title: "codegraph: ask questions about a codebase",
       description:
-        "How codegraph parses a repository into a function call graph, embeds each function into pgvector and expands vector search results along call edges to answer questions about the code.",
+        "How codegraph parses a repository into a function call graph, embeds each function into pgvector and follows call edges from the closest matches to answer questions about the code.",
       sections: [
         {
           heading: "Problem",
           paragraphs: [
-            "Reading an unfamiliar codebase usually means a lot of grepping. Asking an LLM helps only if it gets the right code as context, and a codebase is a bad fit for chunk-and-embed retrieval: the function whose name matches your question is often a thin wrapper, and the logic lives in what it calls.",
+            "Reading an unfamiliar codebase usually means a lot of grepping. Asking an LLM helps only if you give it the right code, and that's harder than it sounds: the function whose name matches your question is often a thin wrapper, and the logic lives in what it calls.",
           ],
         },
         {
@@ -560,9 +560,9 @@ end`,
                 detail: "Each function embedded with Gemini into pgvector",
               },
               {
-                title: "Retrieve",
+                title: "Find",
                 detail:
-                  "Top 8 by vector distance, then one hop along call edges",
+                  "8 closest functions by vector search, plus the functions they call",
               },
               {
                 title: "Answer",
@@ -575,10 +575,10 @@ end`,
           ],
         },
         {
-          heading: "Retrieval",
+          heading: "Finding the right code",
           code: {
             caption:
-              "Seed with vector search, then expand along the call graph",
+              "Start from vector search, then follow the call graph one step",
             language: "python",
             source: "backend/apps/chat/views.py",
             code: `query_vec = embed_texts([query])[0]
@@ -604,7 +604,7 @@ for edge in FunctionEdge.objects.filter(
         {
           heading: "What's missing",
           list: [
-            "There is no retrieval evaluation yet. I haven't measured recall against a labelled set of questions, so I can't say how much the graph expansion helps compared with vector search alone. That's the next thing I want to do.",
+            "I haven't measured answer quality yet against a set of questions with known answers, so I can't say how much following the call graph helps compared with vector search alone.",
             "Regex-based parsing misses some calls in non-Python languages. Moving to tree-sitter would fix most of that.",
           ],
         },

@@ -29,7 +29,7 @@ export const EXPERIENCE: Employer[] = [
     url: "https://getunbound.ai/",
     location: "Remote / Bengaluru",
     summary:
-      "Unbound builds a security platform that helps companies control how their employees and AI agents use AI tools. I interned there twice and worked across the backend, the cloud setup and the detection pipelines.",
+      "Unbound builds a security platform that helps companies control how their employees and AI agents use AI tools. I interned there twice and worked on the backend, the cloud setup and the systems that detect sensitive data.",
     roles: [
       {
         title: "Software Engineering Intern (Summer)",
@@ -37,9 +37,9 @@ export const EXPERIENCE: Employer[] = [
         start: "2026-05",
         end: "2026-06",
         points: [
-          "Added secrets and DLP scanning to the platform using TruffleHog and tuned it to 97% recall and 94% F1. I then went after false positives, which security teams had been complaining about, and cut the alert noise down.",
-          "Tracked down a field-name mismatch in a classifier (path vs files vs paths) that was silently skipping policy checks, and closed the gap.",
-          "Shipped bring-your-own-cloud (BYOC) deployment so enterprise customers can run the product inside their own cloud: Amazon EKS with Helm and ArgoCD for GitOps, Authentik for SSO, plus Prometheus and Grafana for monitoring.",
+          "Added detection for passwords, API keys and other secrets to the platform using TruffleHog. In testing it caught 97% of real secrets (94% F1). I then cut down the false alarms that security teams had been complaining about.",
+          "Found and fixed a bug where some security policies were quietly not being applied, because different parts of the system used different names for the same field.",
+          "Made it possible for large customers to run the whole product inside their own cloud account. This used Kubernetes on AWS (EKS) with Helm and ArgoCD for deployments, Authentik for single sign-on. Prometheus and Grafana handle the monitoring.",
         ],
         stack: [
           "Go",
@@ -59,10 +59,10 @@ export const EXPERIENCE: Employer[] = [
         start: "2025-05",
         end: "2025-12",
         points: [
-          "Moved the core product from GCP to AWS across its microservices. Infrastructure cost came down by up to 20% without hurting reliability or performance.",
-          "Rebuilt the billing system to support invoice-based and usage-metered pricing, and owned it from design through to production.",
-          "Improved the DLP detection pipelines to over 90% classification accuracy.",
-          "Built a low-latency notification service for real-time updates. I also built analytics for AI usage governance so organisations could see how every AI agent was being used.",
+          "Moved the company's product, with all its services, from Google Cloud to AWS. This cut infrastructure costs by up to 20% without making anything slower or less reliable.",
+          "Rebuilt the billing system so customers can be charged by invoice or by how much they use, and looked after it from design to launch.",
+          "Improved the system that spots sensitive data, taking its accuracy above 90%.",
+          "Built a fast notification service for real-time updates, and dashboards that show companies how their AI tools and agents are being used.",
         ],
         stack: ["Python", "Django", "AWS", "GCP", "Docker", "Kubernetes"],
       },

@@ -39,7 +39,6 @@ export const personSchema = () => ({
     "Amazon Web Services",
     "Kubernetes",
     "Machine learning",
-    "Information retrieval",
     "Natural language processing",
     "LLM evaluation",
     "Data science",
