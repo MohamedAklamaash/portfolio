@@ -6,7 +6,7 @@ One identity, two profiles:
 
 - [`/`](https://aklamaash.me): who I am and where to go next
 - [`/software`](https://aklamaash.me/software): backend, distributed systems and cloud infrastructure
-- [`/ai`](https://aklamaash.me/ai): machine learning, LLM evaluation and information retrieval
+- [`/ai`](https://aklamaash.me/ai): machine learning, LLM evaluation and training models
 
 Plus case studies at `/projects/[slug]` and writing at `/posts`.
 

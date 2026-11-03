@@ -4,7 +4,6 @@ import { formatDate } from "@/lib/format";
 import { articleSchema, breadcrumbSchema } from "@/lib/structured-data";
 import { allContents } from "contentlayer/generated";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { useMDXComponent } from "next-contentlayer/hooks";
 import Link from "next/link";
 
 interface Props {
@@ -13,12 +12,11 @@ interface Props {
     title: string;
     description: string;
     date: string;
-    code: string;
+    html: string;
   };
 }
 
 export default function Post({ post }: Props) {
-  const MDX = useMDXComponent(post.code);
   const path = `/posts/${post.slug}`;
   return (
     <>
@@ -66,9 +64,11 @@ export default function Post({ post }: Props) {
             {post.description}
           </p>
         </header>
-        <div className="prose-post mt-8">
-          <MDX components={{ a: (p: any) => <a {...p} /> }} />
-        </div>
+        {/* Built from the repo's own Markdown at build time, not user input. */}
+        <div
+          className="prose-post mt-8"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
         <footer className="mt-14 border-t border-line pt-6">
           <Link
             href="/posts"
@@ -98,7 +98,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
         title: doc.title,
         description: doc.description,
         date: doc.date,
-        code: doc.body.code,
+        html: doc.body.html,
       },
     },
   };

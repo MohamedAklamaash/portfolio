@@ -36,12 +36,12 @@ export const HOME = {
   seo: {
     title: "Mohamed Aklamaash: Software Engineer, Backend and AI",
     description:
-      "Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and information retrieval. Final-year M.Sc. Data Science at PSG Tech.",
+      "Mohamed Aklamaash (Aklamaash) is a software engineer from India working on backend systems, cloud infrastructure, machine learning and AI. Final-year M.Sc. Data Science at PSG Tech.",
   },
   greeting: "Hey, I'm Aklamaash.",
   intro: [
-    "I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and information retrieval alongside.",
-    "The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a retrieval step keeps returning the wrong context. Getting an application to run reliably in the cloud without the bill getting silly.",
+    "I'm a software engineer from India. I like building things and figuring out how they work underneath. Most of my work so far has been on backend systems and cloud infrastructure, with a good amount of machine learning and AI alongside.",
+    "The problems I enjoy most are the ones that make me slow down and think. Designing a backend that still behaves when a worker dies halfway through a job. Working out why a model's results look better than they really are. Getting an application to run reliably in the cloud without the bill getting silly.",
     "I'm in the final year of an integrated M.Sc. in Data Science at PSG College of Technology, and I've spent about a year as an intern at Unbound Security. Here's a bit more about what I've been working on.",
   ],
   paths: {
@@ -54,7 +54,7 @@ export const HOME = {
     ai: {
       title: "AI and Machine Learning",
       description:
-        "Machine learning, information retrieval, LLM evaluation and research-style projects.",
+        "Machine learning, LLM evaluation, training models and research-style projects.",
       examples: "redharness, nanocoder-math, codegraph",
     },
   } satisfies Record<
@@ -105,9 +105,8 @@ export const PROFILES: Record<ProfileId, Profile> = {
     eyebrow: "Software Engineering",
     heading: "Backend systems, infrastructure and the products on top of them.",
     intro: [
-      "I mostly work on backends and the infrastructure they run on. At Unbound Security I moved the core product from GCP to AWS, rebuilt the billing system and later shipped a way for enterprise customers to run the product inside their own cloud on Kubernetes.",
-      "Outside work I keep building the same kind of thing for myself: a deployment platform that runs inside your own AWS account, a Redis-backed job queue in Go and a small Postgres replication tool. I'm also building Tale Analytics, a financial analytics product.",
-      "I like system design and distributed systems because the difficult part is rarely the happy path. Most of the interesting decisions come from asking what happens when a worker crashes halfway, a credential expires in the middle of a deploy or a schema changes underneath you.",
+      "I like backend work because it's where software actually has to hold up. A demo only needs to work once. A real system has to keep working when traffic jumps, a server goes down or someone changes the database underneath it. Working out how to build something that handles all that calmly is the part of engineering I enjoy most.",
+      "At Unbound Security I moved the company's product from Google Cloud to AWS, which cut the infrastructure bill by up to 20%, and rebuilt how customers get billed. Later I worked on letting large customers run the whole product inside their own cloud. On my own, I built Launchpad, which takes any GitHub project and deploys it into your own AWS account in a few minutes. Right now I'm building Tale Analytics, a financial analytics product.",
     ],
     lookingFor:
       "Open to software engineer, backend, platform and infrastructure roles.",
@@ -167,29 +166,27 @@ export const PROFILES: Record<ProfileId, Profile> = {
       },
     ],
     crossLink:
-      "I also work on machine learning, LLM evaluation and retrieval. That work is on a separate page.",
+      "I also work on machine learning and AI, mostly evaluating language models and training small ones. That work is on a separate page.",
   },
 
   ai: {
     id: "ai",
     seo: {
-      title: "AI and Machine Learning: Evaluation and Retrieval",
+      title: "AI and Machine Learning: LLM Evaluation and Training",
       description:
-        "AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, retrieval over code, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.",
+        "AI and machine learning profile of Mohamed Aklamaash: LLM robustness evaluation (redharness), a GPT trained from scratch, multi-agent reinforcement learning, applied ML and a Data Science background. Open to AI engineer and ML engineer roles.",
     },
     eyebrow: "AI and Machine Learning",
-    heading: "Evaluation, retrieval and models I've trained myself.",
+    heading: "Testing models properly and training my own.",
     intro: [
-      "My degree is an integrated M.Sc. in Data Science, so statistics and machine learning are where I started. The parts I keep coming back to now are evaluation and retrieval: how you measure what a model is actually doing, and how you find the right context to give it in the first place.",
-      "Most of my AI work is in my own projects. I built redharness, a benchmark for LLM robustness, after noticing that the same attack could score very differently depending on who graded it. I trained a small GPT from scratch on a laptop to see what each part of the training stack really does. codegraph is my attempt at retrieval over source code, where vector search on its own wasn't enough.",
-      "At Unbound Security I worked on the detection side of an AI security product: secrets and DLP scanning, plus analytics on how AI agents were being used across an organisation. I'm not a published researcher, but I try to work like one where it counts: fixed baselines, seeded runs and writing down the results that didn't go my way.",
+      "I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and what has the model actually learnt? That's why most of my AI work ends up being about evaluating models and training them myself.",
+      "My favourite project here is redharness, a benchmark for how easily language models can be tricked into misbehaving. While building it I found the same attack scored 100% with one grader and 15% with another, which says a lot about how AI safety numbers get reported. I've also trained a small GPT from scratch on my laptop to understand what actually makes training work. At Unbound Security I built secrets detection for an AI security product and tuned it to catch 97% of leaked keys and passwords in testing.",
     ],
-    lookingFor:
-      "Open to AI engineer, ML engineer and applied AI roles, especially ones that involve evaluation or retrieval.",
+    lookingFor: "Open to AI engineer, ML engineer and applied AI roles.",
     focus: [
       "LLM evaluation and safety",
-      "Information retrieval and RAG",
       "Training and ablating small models",
+      "Reinforcement learning",
       "Experiment design",
     ],
     projectsHeading: "Selected projects",
@@ -221,16 +218,6 @@ export const PROFILES: Record<ProfileId, Profile> = {
         usedIn: "redharness; DLP at Unbound",
       },
       {
-        title: "Retrieval",
-        items: [
-          "Dense embeddings",
-          "pgvector",
-          "Graph-expanded retrieval",
-          "Grounded generation",
-        ],
-        usedIn: "codegraph",
-      },
-      {
         title: "Reinforcement learning",
         items: [
           "PPO (Stable-Baselines3)",
@@ -251,8 +238,13 @@ export const PROFILES: Record<ProfileId, Profile> = {
         usedIn: "RAMPART, patternix, coursework",
       },
       {
-        title: "LLM APIs and tooling",
-        items: ["OpenAI", "Anthropic", "Gemini", "FastAPI", "Streamlit"],
+        title: "LLM applications",
+        items: [
+          "OpenAI, Anthropic and Gemini APIs",
+          "Embeddings with pgvector",
+          "FastAPI",
+          "Streamlit",
+        ],
         usedIn: "redharness, codegraph, RAMPART",
       },
     ],

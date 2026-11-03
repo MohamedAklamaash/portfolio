@@ -4,11 +4,11 @@ const isDev = process.env.NODE_ENV !== "production";
 
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 // 'unsafe-inline' is needed for Next's inline bootstrap and JSON-LD.
-// 'unsafe-eval' is only needed by the dev server and the MDX post pages.
-const csp = ({ allowEval }) =>
+// 'unsafe-eval' is only needed by the dev server.
+const csp = () =>
   [
     "default-src 'self'",
-    `script-src 'self' 'unsafe-inline'${isDev || allowEval ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
+    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "font-src 'self'",
@@ -20,7 +20,7 @@ const csp = ({ allowEval }) =>
   ].join("; ");
 
 const securityHeaders = [
-  { key: "Content-Security-Policy", value: csp({ allowEval: false }) },
+  { key: "Content-Security-Policy", value: csp() },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
@@ -48,14 +48,6 @@ const nextConfig = {
   async headers() {
     return [
       { source: "/(.*)", headers: securityHeaders },
-      // MDX posts are compiled at build time but evaluated with new Function()
-      // in the browser (mdx-bundler), so only post pages may use eval.
-      {
-        source: "/posts/:slug",
-        headers: [
-          { key: "Content-Security-Policy", value: csp({ allowEval: true }) },
-        ],
-      },
       {
         source: "/og/:path*",
         headers: [{ key: "Cache-Control", value: dayCache }],

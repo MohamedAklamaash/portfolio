@@ -8,7 +8,7 @@ const Footer = () => (
         <p className="text-[15px] font-medium text-fg">{PERSON.name}</p>
         <p className="mt-2 max-w-xs text-[14px] leading-6 text-muted">
           Software engineer from India. Backend, infrastructure, machine
-          learning and information retrieval.
+          learning and AI.
         </p>
         <p className="mt-4 text-[14px]">
           <a className="link" href={`mailto:${PERSON.email}`}>
