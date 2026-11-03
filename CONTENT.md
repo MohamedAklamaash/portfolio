@@ -53,11 +53,9 @@ Link: https://app.aklamaash.me · Status: In development
 
 ### Backend systems, infrastructure and the products on top of them.
 
-I mostly work on backends and the infrastructure they run on. At Unbound Security I moved the core product from GCP to AWS, rebuilt the billing system and later shipped a way for enterprise customers to run the product inside their own cloud on Kubernetes.
+I like backend work because it's where software actually has to hold up. A demo only needs to work once. A real system has to keep working when traffic jumps, a server goes down or someone changes the database underneath it. Working out how to build something that handles all that calmly is the part of engineering I enjoy most.
 
-Outside work I keep building the same kind of thing for myself: a deployment platform that runs inside your own AWS account, a Redis-backed job queue in Go and a small Postgres replication tool. I'm also building Tale Analytics, a financial analytics product.
-
-I like system design and distributed systems because the difficult part is rarely the happy path. Most of the interesting decisions come from asking what happens when a worker crashes halfway, a credential expires in the middle of a deploy or a schema changes underneath you.
+At Unbound Security I moved the company's product from Google Cloud to AWS, which cut the infrastructure bill by up to 20%, and rebuilt how customers get billed. Later I worked on letting large customers run the whole product inside their own cloud. On my own, I built Launchpad, which takes any GitHub project and deploys it into your own AWS account in a few minutes. Right now I'm building Tale Analytics, a financial analytics product.
 
 Open to software engineer, backend, platform and infrastructure roles.
 
@@ -87,11 +85,9 @@ Open to software engineer, backend, platform and infrastructure roles.
 
 ### Evaluation, retrieval and models I've trained myself.
 
-My degree is an integrated M.Sc. in Data Science, so statistics and machine learning are where I started. The parts I keep coming back to now are evaluation and retrieval: how you measure what a model is actually doing, and how you find the right context to give it in the first place.
+I studied Data Science, but what pulled me into AI is how often a model looks great until you measure it properly. I like the questions that come with that: is this result real, would it hold up on different data, and is the model even looking at the right information? That's why most of my AI work ends up being about evaluation and retrieval.
 
-Most of my AI work is in my own projects. I built redharness, a benchmark for LLM robustness, after noticing that the same attack could score very differently depending on who graded it. I trained a small GPT from scratch on a laptop to see what each part of the training stack really does. codegraph is my attempt at retrieval over source code, where vector search on its own wasn't enough.
-
-At Unbound Security I worked on the detection side of an AI security product: secrets and DLP scanning, plus analytics on how AI agents were being used across an organisation. I'm not a published researcher, but I try to work like one where it counts: fixed baselines, seeded runs and writing down the results that didn't go my way.
+My favourite project here is redharness, a benchmark for how easily language models can be tricked into misbehaving. While building it I found the same attack scored 100% with one grader and 15% with another, which says a lot about how AI safety numbers get reported. I've also trained a small GPT from scratch on my laptop to understand what actually makes training work. At Unbound Security I built secrets detection for an AI security product and tuned it to catch 97% of leaked keys and passwords in testing.
 
 Open to AI engineer, ML engineer and applied AI roles, especially ones that involve evaluation or retrieval.
 
